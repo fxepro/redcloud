@@ -1,15 +1,17 @@
 import Link from "next/link";
-import { ArrowRight, Quote, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/section";
 import { ServiceCard, IndustryCard, PostCard, AiCard } from "@/components/cards";
+import { CustomerGrowth } from "@/components/customer-growth";
 import { CtaBanner } from "@/components/cta";
+import { Reviews } from "@/components/reviews";
 import { getServices, getIndustries, getPosts, getAiSolutions, getPortfolio } from "@/lib/api";
+import { reviews, reviewSummary } from "@/lib/reviews";
 
 const stats = [
-  { value: "100+", label: "Projects delivered" },
-  { value: "12", label: "Industries served" },
-  { value: "10+", label: "Years engineering" },
-  { value: "24/7", label: "Support & monitoring" },
+  { value: "20+", label: "Years enterprise software experience" },
+  { value: "15+", label: "Years consumer & small-business software" },
+  { value: "250+", label: "Active customer installations" },
 ];
 
 const steps = [
@@ -37,14 +39,14 @@ export default async function HomePage() {
         <div className="container relative grid items-center gap-14 py-20 lg:grid-cols-12 lg:py-28">
           <div className="lg:col-span-7">
             <p className="eyebrow">Software Engineering · AI Automation</p>
-            <h1 className="mt-5 text-balance text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
-              We build software that actually{" "}
-              <span className="italic text-brand-600">ships.</span>
+            <h1 className="mt-5 text-5xl leading-[1.1] sm:text-6xl lg:text-7xl">
+              Cut Costs. Deploy AI.<br />
+              Modernize Operations.<br />
+              <span className="italic text-brand-600">Ensure Compliance.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-600">
-              Redcloud Systems is a software engineering studio. We design, build,
-              and support custom software and AI automation for businesses across
-              every industry — from first MVP to enterprise scale.
+              We help businesses reduce infrastructure spend, automate workflows,
+              maintain compliance, and ship software that actually moves the needle.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="/quote" className="btn-primary">
@@ -56,40 +58,28 @@ export default async function HomePage() {
             </div>
             <div className="mt-10 flex items-center gap-4">
               <div className="flex -space-x-2">
-                {["bg-brand-600", "bg-accent-500", "bg-ink-800", "bg-brand-400"].map((c, i) => (
+                {["bg-brand-600", "bg-accent-500", "bg-accent-800", "bg-accent-300"].map((c, i) => (
                   <span key={i} className={`h-9 w-9 rounded-full ${c} ring-2 ring-cream`} />
                 ))}
               </div>
-              <div>
-                <div className="flex text-accent-400">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-sm text-ink-600">
-                  Trusted by 100+ teams across 12 industries
-                </p>
-              </div>
+              <p className="text-sm font-medium text-ink-600">
+                250+ active installations across 12 industries
+              </p>
             </div>
           </div>
 
-          {/* Right: warm testimonial + stats panel */}
+          {/* Right: by-the-numbers panel */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-[1.75rem] border border-ink-200/70 bg-white/70 p-7 shadow-lift backdrop-blur">
-              <Quote className="h-8 w-8 text-brand-300" />
-              <p className="mt-3 font-display text-xl leading-relaxed text-ink-800">
-                “Redcloud shipped in weeks what our last vendor couldn&apos;t in a
-                year — and they still pick up the phone.”
-              </p>
-              <p className="mt-4 text-sm font-semibold text-ink-700">
-                Operations Director
-                <span className="font-normal text-ink-500"> · Healthcare client</span>
-              </p>
-              <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-ink-200/70">
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-ink-200/70 bg-white/70 p-8 shadow-lift backdrop-blur">
+              <p className="eyebrow">By the numbers</p>
+              <div className="mt-6 space-y-5">
                 {stats.map((s) => (
-                  <div key={s.label} className="bg-cream p-5">
-                    <p className="font-display text-3xl text-ink-900">{s.value}</p>
-                    <p className="mt-1 text-xs text-ink-500">{s.label}</p>
+                  <div
+                    key={s.label}
+                    className="flex items-baseline gap-4 border-b border-ink-100 pb-5 last:border-0 last:pb-0"
+                  >
+                    <p className="font-display text-5xl text-brand-600">{s.value}</p>
+                    <p className="text-sm font-medium text-ink-600">{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -183,6 +173,11 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <CustomerGrowth />
+
+      {/* Reviews (manual — auto-hides until reviews are added) */}
+      <Reviews reviews={reviews} summary={reviewSummary} />
 
       {/* Blog */}
       <section className="container py-24">
