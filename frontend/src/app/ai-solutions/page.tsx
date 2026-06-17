@@ -109,8 +109,8 @@ export default async function AiSolutionsPage() {
           description="Explore how we apply AI in your sector — each with tailored agents, automations, and outcomes."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ai.map((a) => (
-            <AiCard key={a.slug} item={a} />
+          {ai.map((a, i) => (
+            <AiCard key={a.slug} item={a} index={i} />
           ))}
         </div>
       </section>

@@ -1,16 +1,17 @@
 import Link from "next/link";
-import { Cloud } from "lucide-react";
+import Image from "next/image";
 
 export function Logo({ light = false }: { light?: boolean }) {
   return (
-    <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight">
-      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white">
-        <Cloud className="h-5 w-5" />
-      </span>
-      <span className={`leading-none ${light ? "text-white" : "text-ink-900"}`}>
-        Redcloud{" "}
-        <span className="font-semibold text-brand-600">Systems</span>
-      </span>
+    <Link href="/" className="inline-flex items-center" aria-label="Redcloud Systems">
+      <Image
+        src={light ? "/logo-white.png" : "/logo-web.png"}
+        alt="Redcloud Systems"
+        width={400}
+        height={126}
+        priority
+        className="h-9 w-auto"
+      />
     </Link>
   );
 }

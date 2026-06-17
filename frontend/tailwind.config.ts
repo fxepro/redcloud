@@ -64,6 +64,21 @@ const config: Config = {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "Georgia", "serif"],
       },
+      // Type scale — content sizes 32→16 (16px is the hard floor).
+      // 5xl–7xl are display sizes (hero) above the content scale.
+      fontSize: {
+        xs: ["1rem", { lineHeight: "1.5rem" }], //   16  (floor — labels, pills, meta)
+        sm: ["1rem", { lineHeight: "1.5rem" }], //   16  (floor — small body)
+        base: ["1rem", { lineHeight: "1.65rem" }], //  16  body
+        lg: ["1.125rem", { lineHeight: "1.7rem" }], //  18  H5 / lead / card titles
+        xl: ["1.5rem", { lineHeight: "2rem" }], //      24  (interpolation step)
+        "2xl": ["1.75rem", { lineHeight: "2.25rem" }], // 28  H4
+        "3xl": ["2rem", { lineHeight: "2.4rem" }], //   32  H3
+        "4xl": ["2.25rem", { lineHeight: "2.6rem" }], // 36  H2
+        "5xl": ["3rem", { lineHeight: "3.25rem" }], //   48  H1
+        "6xl": ["3.375rem", { lineHeight: "3.55rem" }], // 54  (display step)
+        "7xl": ["3.75rem", { lineHeight: "3.85rem" }], // 60  Title (display max)
+      },
       boxShadow: {
         soft: "0 2px 8px -2px rgba(15, 23, 42, 0.08), 0 8px 28px -8px rgba(15, 23, 42, 0.12)",
         lift: "0 12px 40px -12px rgba(15, 23, 42, 0.22)",

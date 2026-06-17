@@ -96,14 +96,31 @@ export function IndustryCard({ industry }: { industry: Industry }) {
   );
 }
 
-export function AiCard({ item }: { item: AiSolution }) {
+const aiGradients = [
+  "from-accent-500 to-accent-900",
+  "from-accent-700 to-navy-950",
+  "from-accent-400 to-accent-700",
+  "from-accent-600 to-navy-900",
+  "from-brand-600 to-brand-800",
+  "from-accent-500 to-accent-800",
+];
+
+export function AiCard({ item, index = 0 }: { item: AiSolution; index?: number }) {
+  const g = aiGradients[index % aiGradients.length];
   return (
-    <Link href={`/ai-solutions/${item.slug}`} className="card group flex flex-col">
-      <h3 className="flex items-center justify-between text-lg">
+    <Link
+      href={`/ai-solutions/${item.slug}`}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${g} p-6 text-white shadow-soft transition hover:-translate-y-1 hover:shadow-lift`}
+    >
+      <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10 blur-2xl" />
+      <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/25">
+        <Icon name="Cpu" className="h-5 w-5" />
+      </span>
+      <h3 className="relative mt-4 flex items-center justify-between gap-2 text-lg !text-white">
         {item.title}
-        <ArrowUpRight className="h-5 w-5 text-ink-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-600" />
+        <ArrowUpRight className="h-5 w-5 shrink-0 text-white/80 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-600">{item.excerpt}</p>
+      <p className="relative mt-2 flex-1 text-sm leading-relaxed text-white/85">{item.excerpt}</p>
     </Link>
   );
 }

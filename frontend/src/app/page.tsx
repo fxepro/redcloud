@@ -127,7 +127,7 @@ export default async function HomePage() {
       </section>
 
       {/* Process */}
-      <section className="bg-ink-900">
+      <section className="bg-accent-950">
         <div className="container py-24">
           <SectionHeading
             eyebrow="How we work"
@@ -135,9 +135,9 @@ export default async function HomePage() {
             description="No black boxes. You see progress every week and own everything we build."
             light
           />
-          <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-ink-800 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-accent-800 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((s) => (
-              <div key={s.n} className="bg-ink-900 p-8">
+              <div key={s.n} className="bg-accent-950 p-8">
                 <span className="font-display text-4xl text-brand-500">{s.n}</span>
                 <h3 className="mt-4 text-xl !text-cream">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-400">{s.body}</p>
@@ -148,7 +148,8 @@ export default async function HomePage() {
       </section>
 
       {/* AI */}
-      <section className="container py-24">
+      <section className="bg-sand-100 py-24">
+        <div className="container">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading
             eyebrow="AI Solutions"
@@ -160,14 +161,15 @@ export default async function HomePage() {
           </Link>
         </div>
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {ai.slice(0, 8).map((a) => (
-            <AiCard key={a.slug} item={a} />
+          {ai.slice(0, 8).map((a, i) => (
+            <AiCard key={a.slug} item={a} index={i} />
           ))}
+        </div>
         </div>
       </section>
 
       {/* Industries */}
-      <section className="bg-sand-100">
+      <section>
         <div className="container py-24">
           <SectionHeading
             eyebrow="Industries"
