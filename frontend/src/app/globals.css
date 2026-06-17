@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink-700 antialiased;
+}
+
+@layer base {
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-ink-900;
+    font-weight: 500;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 text-white shadow-soft hover:bg-brand-700 hover:shadow-lift hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply btn border border-ink-300/70 bg-transparent text-ink-800 hover:border-ink-400 hover:bg-ink-50;
+  }
+  .btn-light {
+    @apply btn bg-cream text-ink-900 hover:bg-white hover:-translate-y-0.5;
+  }
+  .btn-dark {
+    @apply btn bg-ink-900 text-cream hover:bg-ink-800 hover:-translate-y-0.5;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-700;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-brand-400;
+  }
+  .card {
+    @apply rounded-2xl border border-ink-200/70 bg-white/80 p-6 shadow-soft backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Decorative dotted grid used on dark banners (kept out of pages) */
+  .bg-dot-grid {
+    background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+}
+
+@layer components {
+  /* Dark hero/banner surface — section / landing pages */
+  .banner-surface {
+    @apply relative overflow-hidden bg-gradient-to-br from-accent-950 via-accent-900 to-brand-900 text-white;
+  }
+  /* Light-blue banner surface — second-level (detail) pages */
+  .banner-surface-light {
+    @apply relative overflow-hidden border-b border-accent-100 bg-gradient-to-br from-accent-50 via-accent-100 to-white text-ink-900;
+  }
+  /* Standard vertical rhythm for content sections */
+  .section {
+    @apply py-16 lg:py-20;
+  }
+}
