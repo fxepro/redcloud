@@ -73,9 +73,9 @@ export const services: Service[] = [
   },
   {
     slug: "ongoing-support",
-    title: "Ongoing Support",
+    title: "Managed Services",
     icon: "LifeBuoy",
-    excerpt: "Maintenance, monitoring, and enhancements after you go live.",
+    excerpt: "Proactive monitoring, maintenance, and ongoing support after launch.",
     body: [
       "Software is never done. We offer SLA-backed support, proactive monitoring, security patching, and a roadmap for continuous improvement.",
     ],
@@ -84,7 +84,7 @@ export const services: Service[] = [
       { title: "Proactive System Monitoring", description: "Catch and resolve issues before they impact operations.", bullets: ["Real-time performance tracking", "Automated anomaly & downtime alerts", "Periodic health checks & diagnostics"] },
       { title: "Maintenance & Updates", description: "Keep your software current, fast, and secure.", bullets: ["Security patches & updates", "Codebase optimization", "Database maintenance"] },
       { title: "Help Desk & Technical Support", description: "Prompt assistance for troubleshooting and fixes.", bullets: ["Ticket-based bug resolution", "Configuration & integration help", "Step-by-step user guidance"] },
-      { title: "Performance Optimization", description: "Scale smoothly as demand grows.", bullets: ["Load testing & capacity planning", "Database performance tuning", "App speed & resource optimization"] },
+      { title: "Website Care & Growth", description: "Ongoing website support, updates, and growth optimization.", bullets: ["Content updates and publishing", "Performance and SEO monitoring", "Security and uptime management"], href: "/landing/care-growth" },
     ],
   },
   {
@@ -105,7 +105,7 @@ export const services: Service[] = [
   },
   {
     slug: "erp-implementation",
-    title: "ERP Implementation",
+    title: "ERP & Business Systems",
     icon: "Boxes",
     excerpt: "Implement and integrate ERP systems without the chaos.",
     body: [
@@ -133,6 +133,94 @@ export const services: Service[] = [
       { title: "Technology Strategy Development", description: "A technology roadmap aligned to your business goals.", bullets: ["Digital transformation strategy", "Align tech investments to long-term goals", "IT initiative budgeting"] },
       { title: "Software Selection & Implementation", description: "Identify, evaluate, and roll out the right tools.", bullets: ["CRM, ERP, BI & analytics recommendations", "Cost-benefit analysis", "Vendor evaluation & negotiation"] },
       { title: "Emerging Technology Consulting", description: "Adopt AI, blockchain, and IoT for competitive advantage.", bullets: ["AI-driven automation solutions", "IoT integration for smart operations", "Blockchain use-case evaluation"] },
+    ],
+  },
+  {
+    slug: "ai-transformation",
+    title: "AI Transformation",
+    icon: "Bot",
+    excerpt: "Intelligent automation, digital workers, and AI-driven decision making.",
+    body: [
+      "We design, build, and deploy AI agents and automation that connect to your existing systems — planning multi-step tasks, executing across platforms, and running around the clock.",
+      "From agentic workflows and RAG knowledge systems to voice agents and customer service automation, we help you scale output without scaling headcount.",
+    ],
+    features: [
+      "Connects to your existing tools",
+      "Multi-step autonomous workflows",
+      "24/7 operation with guardrails",
+      "Deployed in weeks, not months",
+    ],
+    offerings: [
+      { title: "AI Workforce", description: "Digital workers that handle repetitive, high-volume tasks end to end.", bullets: ["Task automation across departments", "Human-in-the-loop approvals", "Measurable productivity gains"], href: "/landing/ai-workforce" },
+      { title: "AI Operations Center", description: "Ask questions of your business data and get answers in seconds.", bullets: ["Unified data across systems", "Natural language queries", "Real-time operational insights"], href: "/landing/ai-operations" },
+      { title: "AI Knowledge Systems", description: "Domain-specific assistants grounded in your own documents and data.", bullets: ["RAG over internal knowledge bases", "Private, secure deployments", "Instant answers for staff and customers"], href: "/landing/ai-knowledge" },
+      { title: "AI Voice & Customer Service", description: "AI agents that answer calls, qualify leads, and resolve support requests.", bullets: ["24/7 call handling", "CRM and ticketing integration", "Consistent, on-brand responses"], href: "/landing/ai-voice" },
+    ],
+  },
+  {
+    slug: "compliance-security",
+    title: "Compliance & Security",
+    icon: "Shield",
+    excerpt: "Reduce risk, improve governance, and prepare for audits and regulations.",
+    body: [
+      "Healthcare, finance, defense, and SaaS companies face growing pressure to demonstrate security maturity and regulatory readiness. We help you close gaps before an audit or breach forces your hand.",
+      "From HIPAA and SOC 2 to ISO 27001, PCI DSS, NIST, and CMMC — we implement the technical and operational controls your organization needs, plus AI-powered compliance monitoring.",
+    ],
+    features: [
+      "Gap assessments & remediation roadmaps",
+      "Policy and documentation support",
+      "Security controls implementation",
+      "Ongoing compliance monitoring",
+    ],
+    offerings: [
+      { title: "HIPAA Readiness", description: "Protect patient data and prepare for healthcare audits.", bullets: ["Security risk analysis", "Access controls & MFA", "HIPAA-compliant email"], href: "/compliance/hipaa" },
+      { title: "SOC 2 & ISO 27001", description: "Demonstrate security maturity to enterprise customers.", bullets: ["Control gap assessments", "Policy development", "Audit preparation"], href: "/compliance/soc2" },
+      { title: "PCI DSS & NIST", description: "Protect payment data and apply security best practices.", bullets: ["CDE scoping & segmentation", "Vulnerability management", "Risk treatment planning"], href: "/compliance/pci-dss" },
+      { title: "Compliance Automation", description: "Never miss a regulatory change with AI-powered monitoring.", bullets: ["Automated regulatory alerts", "Policy gap detection", "Continuous compliance tracking"], href: "/landing/ai-compliance" },
+    ],
+  },
+  {
+    slug: "cloud-infrastructure",
+    title: "Cloud & Infrastructure",
+    icon: "Cloud",
+    excerpt: "Cloud migration, cost optimization, and infrastructure that scales reliably.",
+    body: [
+      "Cloud spend grows faster than value when architecture isn't right-sized. We help you reduce costs, migrate confidently, and build infrastructure that performs under real-world load.",
+      "From AWS cost optimization and legacy modernization to performance tuning and free digital audits — we make your infrastructure a competitive advantage, not a liability.",
+    ],
+    features: [
+      "Cloud cost reduction",
+      "Legacy-to-cloud migration",
+      "Performance optimization",
+      "Infrastructure monitoring",
+    ],
+    offerings: [
+      { title: "Cloud Cost Reduction", description: "Cut AWS and cloud spend without sacrificing performance.", bullets: ["Right-sizing & reserved instances", "Unused resource cleanup", "Ongoing cost monitoring"], href: "/landing/cloud-cost" },
+      { title: "Legacy Modernization", description: "Upgrade outdated systems for performance, scale, and security.", bullets: ["Cloud migration planning", "Database modernization", "Re-platform without losing functionality"], href: "/landing/legacy" },
+      { title: "Performance Optimization", description: "Make applications faster, more reliable, and ready to scale.", bullets: ["Load testing & tuning", "CDN and caching strategy", "Database performance optimization"], href: "/landing/performance" },
+      { title: "Free Digital Audit", description: "Identify gaps in security, performance, and infrastructure.", bullets: ["Security vulnerability scan", "Performance baseline", "Prioritized recommendations"], href: "/landing/free-audit" },
+    ],
+  },
+  {
+    slug: "executive-intelligence",
+    title: "Executive Intelligence",
+    icon: "Eye",
+    excerpt: "Real-time insights, market awareness, and strategic intelligence for leadership.",
+    body: [
+      "Leadership teams need to know what's changing in their market, regulatory environment, and competitive landscape — before it shows up in quarterly results.",
+      "We build executive intelligence platforms powered by AI research agents, competitive monitoring, and regulatory tracking that deliver briefings leadership can act on.",
+    ],
+    features: [
+      "Competitive & market monitoring",
+      "Regulatory intelligence",
+      "AI-powered research agents",
+      "Executive-ready briefings",
+    ],
+    offerings: [
+      { title: "Executive Intelligence Platform", description: "A unified view of market, competitive, and regulatory signals.", bullets: ["Daily and weekly briefings", "Custom alert thresholds", "Leadership dashboard"], href: "/landing/executive-intelligence" },
+      { title: "Competitive Intelligence", description: "Track competitor moves, pricing, and product launches.", bullets: ["Automated competitor monitoring", "Pricing and positioning analysis", "Win/loss intelligence"] },
+      { title: "Regulatory Intelligence", description: "Stay ahead of regulatory changes that affect your business.", bullets: ["Automated regulatory tracking", "Impact assessment", "Compliance deadline alerts"], href: "/landing/ai-compliance" },
+      { title: "AI Research Agents", description: "Agents that research, summarize, and deliver insights on demand.", bullets: ["Natural language research queries", "Source-cited summaries", "Grounded in your industry context"], href: "/landing/ai-knowledge" },
     ],
   },
 ];
@@ -175,10 +263,14 @@ const ux = (id: string) =>
 const serviceMeta: Record<string, { tagline: string; subtext: string; img: string }> = {
   "custom-software-development": { tagline: "Custom software, engineered to ship and built to last.", subtext: "From web and mobile to APIs and legacy modernization, we design and build software around your business — not a template.", img: "1461749280684-dccba630e2f6" },
   "project-management": { tagline: "Senior delivery leadership that keeps projects on track.", subtext: "Transparent planning, weekly demos, and disciplined execution that protect your scope, budget, and timeline.", img: "1552664730-d307ca884978" },
-  "ongoing-support": { tagline: "Keep your software fast, secure, and always on.", subtext: "SLA-backed monitoring, maintenance, and enhancements that keep your systems healthy long after launch.", img: "1581092921461-eab62e97a780" },
+  "ongoing-support": { tagline: "Keep your systems fast, secure, and always on.", subtext: "SLA-backed monitoring, maintenance, and enhancements that keep your platforms healthy long after launch.", img: "1581092921461-eab62e97a780" },
   "digital-marketing": { tagline: "Performance marketing that compounds with your product.", subtext: "SEO, paid acquisition, content, and analytics that tie every dollar of spend back to revenue.", img: "1460925895917-afdab827c52f" },
   "erp-implementation": { tagline: "Implement and integrate ERP — without the chaos.", subtext: "From platform selection to rollout and training, we make ERP work the way your business actually runs.", img: "1551288049-bebda4e38f71" },
   "technical-consulting": { tagline: "Senior engineering judgment, on demand.", subtext: "Architecture reviews, security audits, cloud optimization, and technology strategy from people who've shipped.", img: "1521737604893-d14cc237f11d" },
+  "ai-transformation": { tagline: "Scale operations with intelligent automation and digital workers.", subtext: "AI agents, knowledge systems, and automation built into the tools you already use — deployed in weeks, not months.", img: "1620712943543-bcc4688e7485" },
+  "compliance-security": { tagline: "Reduce risk and prepare for audits with confidence.", subtext: "HIPAA, SOC 2, ISO 27001, PCI DSS, NIST, CMMC — plus security assessments and AI-powered compliance monitoring.", img: "1563013544-824ae1b704d3" },
+  "cloud-infrastructure": { tagline: "Right-size cloud spend and build infrastructure that scales.", subtext: "Cost optimization, migration, legacy modernization, and performance tuning across AWS, Azure, and Google Cloud.", img: "1504639725590-34d0984388bd" },
+  "executive-intelligence": { tagline: "Strategic intelligence leadership can act on.", subtext: "Competitive monitoring, regulatory tracking, and AI research agents that surface what matters before competitors do.", img: "1551288049-bebda4e38f71" },
 };
 
 // Attach real legacy page copy + banners to the structured service/AI definitions.

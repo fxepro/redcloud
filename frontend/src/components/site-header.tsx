@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { services, industries, aiSolutions } from "@/lib/content";
+import { industries, aiSolutions } from "@/lib/content";
+import { serviceCatalog } from "@/lib/services-data";
 import { Icon } from "./icon";
 import { Logo } from "./logo";
 import { cn } from "@/lib/utils";
@@ -27,14 +28,44 @@ interface Mega {
 }
 
 const MEGA: Record<string, Mega> = {
+  Solutions: {
+    cols: "lg:grid-cols-3",
+    overview: { label: "All solutions", href: "/solutions" },
+    sections: [
+      {
+        title: "Grow & Transform",
+        items: [
+          { icon: "Bot",        title: "AI Transformation",       desc: "Scale operations with intelligent automation and digital workers.",   href: "/solutions/ai-transformation" },
+          { icon: "TrendingUp", title: "Revenue Growth",           desc: "More leads, better conversion, higher customer lifetime value.",       href: "/solutions/revenue-growth" },
+          { icon: "RefreshCw",  title: "Digital Modernization",    desc: "Modernize apps, platforms, and business systems for the next decade.", href: "/solutions/digital-modernization" },
+        ],
+      },
+      {
+        title: "Protect & Optimize",
+        items: [
+          { icon: "Shield",     title: "Risk, Security & Compliance", desc: "Reduce risk and prepare for audits, regulations, and customers.",   href: "/solutions/risk-security-compliance" },
+          { icon: "PiggyBank",  title: "Cost Optimization",           desc: "Cut technology spend while improving performance and reliability.", href: "/solutions/cost-optimization" },
+          { icon: "HeartPulse", title: "Healthcare Transformation",   desc: "AI, compliance, and operational modernization for healthcare.",      href: "/solutions/healthcare-transformation" },
+        ],
+      },
+      {
+        title: "Lead & Innovate",
+        items: [
+          { icon: "Eye",        title: "Executive Intelligence",          desc: "Real-time insights and strategic intelligence for leadership.",     href: "/solutions/executive-intelligence" },
+          { icon: "UserCog",    title: "Digital Workforce Transformation", desc: "Evolve your workforce for an AI-first economy.",                  href: "/solutions/digital-workforce" },
+          { icon: "Lightbulb",  title: "Innovation & Emerging Technology", desc: "Position for future opportunities through AI strategy.",         href: "/solutions/innovation" },
+        ],
+      },
+    ],
+  },
   Services: {
-    cols: "sm:grid-cols-2 lg:grid-cols-3",
+    cols: "sm:grid-cols-2 lg:grid-cols-4",
     overview: { label: "All services", href: "/services" },
-    items: services.map((s) => ({
+    items: serviceCatalog.map((s) => ({
       icon: s.icon,
       title: s.title,
       desc: s.excerpt,
-      href: `/services/${s.slug}`,
+      href: s.href,
     })),
   },
   Industries: {
@@ -113,6 +144,7 @@ const MEGA: Record<string, Mega> = {
 };
 
 const TOP: { title: string; href: string; mega?: string }[] = [
+  { title: "Solutions", href: "/solutions", mega: "Solutions" },
   { title: "Services", href: "/services", mega: "Services" },
   { title: "Industries", href: "/industries", mega: "Industries" },
   { title: "AI", href: "/ai-development", mega: "AI" },

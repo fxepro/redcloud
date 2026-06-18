@@ -1,4 +1,5 @@
-import { CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Icon, iconForText } from "./icon";
 import { SectionHeading } from "./section";
 import type { ServiceOffering } from "@/lib/types";
@@ -23,6 +24,14 @@ export function OfferingCard({ offering }: { offering: ServiceOffering }) {
             </li>
           ))}
         </ul>
+        {offering.href && (
+          <Link
+            href={offering.href}
+            className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition hover:text-brand-800"
+          >
+            Learn more <ArrowRight className="h-4 w-4" />
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ export default async function ServiceDetail({
       <MediaSplit image={service.heroImage} alt={service.title} priority>
         <p className="eyebrow">The service</p>
         <h2 className="mt-3 text-balance text-3xl sm:text-4xl">
-          Engineering {service.title.toLowerCase()} that delivers
+          {service.tagline ?? service.title}
         </h2>
         <div className="mt-4 space-y-4 leading-relaxed text-ink-600">
           {service.body.map((p, i) => (

@@ -13,6 +13,7 @@ export interface ServiceOffering {
   title: string;
   description: string;
   bullets: string[];
+  href?: string;
 }
 
 export interface Service {

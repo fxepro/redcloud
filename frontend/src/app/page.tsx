@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/section";
 import { ServiceCard, IndustryCard, PostCard, AiCard } from "@/components/cards";
@@ -88,19 +89,43 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Trust strip */}
-      <section className="border-y border-ink-200/60 bg-sand-100">
-        <div className="container flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-6">
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-500">
-            Selected clients
-          </span>
-          {portfolio.slice(0, 6).map((p) => (
-            <span key={p.slug} className="font-display text-lg text-ink-400">
-              {p.title}
-            </span>
-          ))}
-        </div>
-      </section>
+      {/* Partner strip */}
+      {(() => {
+        const partners = [
+          { name: "Google Cloud", file: "google-cloud.svg" },
+          { name: "AWS",          file: "aws.svg" },
+          { name: "Azure",        file: "azure.svg" },
+          { name: "Oracle",       file: "oracle.svg" },
+          { name: "OpenAI",       file: "openai.svg" },
+          { name: "Anthropic",    file: "anthropic.svg" },
+          { name: "NVIDIA",       file: "nvidia.svg" },
+          { name: "Salesforce",   file: "salesforce.svg" },
+          { name: "Cloudflare",   file: "cloudflare.svg" },
+          { name: "Stripe",       file: "stripe.svg" },
+        ];
+        return (
+          <section className="border-y border-ink-100 bg-white">
+            <div className="container py-10">
+              <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.18em] text-ink-400">
+                We work with
+              </p>
+              <div className="grid grid-cols-2 items-center gap-10 md:grid-cols-5 lg:grid-cols-10">
+                {partners.map(({ name, file }) => (
+                  <div key={name} className="flex items-center justify-center">
+                    <Image
+                      src={`/logos/${file}`}
+                      alt={name}
+                      width={120}
+                      height={32}
+                      className="h-8 w-auto object-contain grayscale opacity-[0.65] transition-all duration-200 hover:brightness-[0.15] hover:opacity-100"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Services */}
       <section className="container py-24">
