@@ -5,9 +5,11 @@ import { PageBanner } from "@/components/page-banner";
 import { SubtextBar } from "@/components/subtext-bar";
 import { MediaSplit } from "@/components/media-split";
 import { CoreServices } from "@/components/offerings";
+import { SectionHeading } from "@/components/section";
+import { AiCard } from "@/components/cards";
 import { LatestArticles } from "@/components/latest-articles";
 import { CtaBanner } from "@/components/cta";
-import { getPosts } from "@/lib/api";
+import { getPosts, getAiSolutions } from "@/lib/api";
 import type { ServiceOffering } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -68,7 +70,7 @@ const offerings: ServiceOffering[] = [
 ];
 
 export default async function AiDevelopmentPage() {
-  const posts = await getPosts();
+  const [posts, ai] = await Promise.all([getPosts(), getAiSolutions()]);
 
   return (
     <>
@@ -126,6 +128,21 @@ export default async function AiDevelopmentPage() {
           </Link>
         }
       />
+
+      {/* AI Solutions by Industry */}
+      <section className="container section">
+        <SectionHeading
+          center
+          eyebrow="By industry"
+          title="AI solutions by industry"
+          description="Explore how we apply AI in your sector — tailored agents, automations, and outcomes built for the way your business actually works."
+        />
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {ai.map((a, i) => (
+            <AiCard key={a.slug} item={a} index={i} />
+          ))}
+        </div>
+      </section>
 
       <LatestArticles posts={posts} />
 

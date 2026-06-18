@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { PageHeader } from "@/components/page-header";
+import { PageBanner } from "@/components/page-banner";
 
 export const metadata: Metadata = {
   title: "About",
@@ -85,10 +85,12 @@ const history = [
 export default function AboutPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="About"
-        title="Engineering partners for ambitious businesses"
+      <PageBanner
+        icon="Users"
+        title="About Redcloud Systems"
+        tagline="Engineering partners for ambitious businesses — building what's next since 2013."
         breadcrumbs={[{ label: "About" }]}
+        cta={{ label: "Talk to us", href: "/contact", icon: <ArrowRight className="h-4 w-4" /> }}
       />
 
       {/* Intro + Manifesto */}

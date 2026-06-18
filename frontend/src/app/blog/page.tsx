@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/page-header";
+import { PageBanner } from "@/components/page-banner";
 import { PostCard } from "@/components/cards";
 import { CtaBanner } from "@/components/cta";
 import { getPosts } from "@/lib/api";
@@ -15,10 +15,10 @@ export default async function BlogPage() {
 
   return (
     <>
-      <PageHeader
-        eyebrow="Insights"
-        title="The Redcloud blog"
-        description="Practical thinking on software engineering, AI automation, and growth."
+      <PageBanner
+        icon="BookOpen"
+        title="The Redcloud Blog"
+        tagline="Practical thinking on software engineering, AI automation, and growth."
         breadcrumbs={[{ label: "Blog" }]}
       />
       <section className="container py-16">

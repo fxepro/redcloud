@@ -14,10 +14,16 @@ interface MegaItem {
   desc?: string;
   href: string;
 }
+interface MegaSection {
+  title: string;
+  items: MegaItem[];
+  wide?: boolean;
+}
 interface Mega {
   cols: string;
   overview: { label: string; href: string };
-  items: MegaItem[];
+  items?: MegaItem[];
+  sections?: MegaSection[];
 }
 
 const MEGA: Record<string, Mega> = {
@@ -51,13 +57,66 @@ const MEGA: Record<string, Mega> = {
       href: `/ai-solutions/${a.slug}`,
     })),
   },
+  AI: {
+    cols: "lg:grid-cols-3",
+    overview: { label: "AI overview", href: "/ai-development" },
+    sections: [
+      {
+        title: "AI Development",
+        items: [
+          { icon: "Bot",          title: "Agentic AI Workflows",  desc: "Autonomous agents that plan and execute multi-step tasks end to end.",  href: "/ai-development#agentic" },
+          { icon: "Plug",         title: "AI Integration",         desc: "Plug AI directly into the platforms you already run.",                   href: "/ai-development#integration" },
+          { icon: "BrainCircuit", title: "Custom Models & RAG",    desc: "Domain-specific assistants grounded in your own data.",                  href: "/ai-development#custom-models" },
+          { icon: "Cog",          title: "AI Automation & Ops",    desc: "Keep AI reliable, measured, and cost-aware in production.",              href: "/ai-development#automation" },
+          { icon: "Rocket",       title: "Startup MVP Program",    desc: "Go from idea to live product in 30–60 days at a fraction of the cost.",  href: "/landing/startup-mvp" },
+        ],
+      },
+      {
+        title: "AI Solutions by Industry",
+        wide: true,
+        items: aiSolutions.map((a) => ({
+          icon: "Cpu",
+          title: a.title.replace(/ AI$/, ""),
+          desc: a.excerpt,
+          href: `/ai-solutions/${a.slug}`,
+        })),
+      },
+    ],
+  },
+  Compliance: {
+    cols: "lg:grid-cols-2",
+    overview: { label: "Compliance overview", href: "/compliance" },
+    sections: [
+      {
+        title: "Compliance Solutions",
+        items: [
+          { icon: "Shield",        title: "Compliance Overview",        desc: "Reduce risk, improve security, and prepare for audits.",           href: "/compliance" },
+          { icon: "HeartPulse",    title: "HIPAA Readiness",            desc: "Protect patient data and healthcare information.",                 href: "/compliance/hipaa" },
+          { icon: "BadgeCheck",    title: "SOC 2 Readiness",            desc: "Demonstrate security and operational maturity.",                   href: "/compliance/soc2" },
+          { icon: "Globe",         title: "ISO 27001",                  desc: "Structured information security management.",                      href: "/compliance/iso27001" },
+          { icon: "CreditCard",    title: "PCI DSS Readiness",          desc: "Protect payment card data and payment systems.",                   href: "/compliance/pci-dss" },
+          { icon: "Lock",          title: "NIST Framework",             desc: "Security best practices and cyber resilience.",                    href: "/compliance/nist" },
+          { icon: "Building2",     title: "CMMC Readiness",             desc: "DoD cybersecurity requirements for defense contractors.",          href: "/compliance/cmmc" },
+        ],
+      },
+      {
+        title: "Compliance Automation",
+        items: [
+          { icon: "Bell",          title: "AI Compliance Monitoring",   desc: "Never miss a regulatory change — automated alerts.",              href: "/landing/ai-compliance" },
+          { icon: "Search",        title: "Security Assessments",       desc: "Identify vulnerabilities and compliance gaps.",                    href: "/compliance#security-assessments" },
+          { icon: "FileText",      title: "Policy & Documentation",     desc: "Develop policies, procedures, and operational controls.",          href: "/compliance#policy" },
+          { icon: "RefreshCw",     title: "Ongoing Compliance Support", desc: "Maintain and improve your compliance posture over time.",          href: "/compliance#ongoing-support" },
+        ],
+      },
+    ],
+  },
 };
 
 const TOP: { title: string; href: string; mega?: string }[] = [
   { title: "Services", href: "/services", mega: "Services" },
   { title: "Industries", href: "/industries", mega: "Industries" },
-  { title: "AI Solutions", href: "/ai-solutions", mega: "AI Solutions" },
-  { title: "AI Development", href: "/ai-development" },
+  { title: "AI", href: "/ai-development", mega: "AI" },
+  { title: "Compliance", href: "/compliance", mega: "Compliance" },
   { title: "Portfolio", href: "/portfolio" },
   { title: "Blog", href: "/blog" },
   { title: "About", href: "/about" },
@@ -154,32 +213,73 @@ export function SiteHeader() {
                   {active.overview.label} →
                 </Link>
               </div>
-              <div className={cn("grid gap-x-6 gap-y-1", active.cols)}>
-                {active.items.map((it) => (
-                  <Link
-                    key={it.href}
-                    href={it.href}
-                    onClick={() => setOpen(null)}
-                    className="group/i flex items-start gap-3 rounded-xl p-3 transition hover:bg-accent-50"
-                  >
-                    {it.icon && (
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-50 text-accent-700 ring-1 ring-accent-100 transition group-hover/i:bg-accent-100">
-                        <Icon name={it.icon} className="h-5 w-5" />
-                      </span>
-                    )}
-                    <span className="min-w-0">
-                      <span className="block text-sm font-semibold text-ink-900 transition group-hover/i:text-brand-700">
-                        {it.title}
-                      </span>
-                      {it.desc && (
-                        <span className="mt-0.5 block text-xs leading-relaxed text-ink-500 line-clamp-2">
-                          {it.desc}
+
+              {/* Sectioned layout (e.g. Compliance, AI) */}
+              {active.sections ? (
+                <div className={cn("grid gap-x-10", active.cols)}>
+                  {active.sections.map((sec) => (
+                    <div key={sec.title} className={sec.wide ? "lg:col-span-2" : undefined}>
+                      <p className="mb-2 px-3 text-xs font-bold uppercase tracking-[0.14em] text-accent-700">
+                        {sec.title}
+                      </p>
+                      <div className={cn("grid gap-y-0.5", sec.wide && "sm:grid-cols-2")}>
+                        {sec.items.map((it) => (
+                          <Link
+                            key={it.href}
+                            href={it.href}
+                            onClick={() => setOpen(null)}
+                            className="group/i flex items-start gap-3 rounded-xl p-3 transition hover:bg-accent-50"
+                          >
+                            {it.icon && (
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-50 text-accent-700 ring-1 ring-accent-100 transition group-hover/i:bg-accent-100">
+                                <Icon name={it.icon} className="h-5 w-5" />
+                              </span>
+                            )}
+                            <span className="min-w-0">
+                              <span className="block text-sm font-semibold text-ink-900 transition group-hover/i:text-brand-700">
+                                {it.title}
+                              </span>
+                              {it.desc && (
+                                <span className="mt-0.5 block text-xs leading-relaxed text-ink-500 line-clamp-2">
+                                  {it.desc}
+                                </span>
+                              )}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                /* Default flat layout */
+                <div className={cn("grid gap-x-6 gap-y-1", active.cols)}>
+                  {active.items?.map((it) => (
+                    <Link
+                      key={it.href}
+                      href={it.href}
+                      onClick={() => setOpen(null)}
+                      className="group/i flex items-start gap-3 rounded-xl p-3 transition hover:bg-accent-50"
+                    >
+                      {it.icon && (
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-50 text-accent-700 ring-1 ring-accent-100 transition group-hover/i:bg-accent-100">
+                          <Icon name={it.icon} className="h-5 w-5" />
                         </span>
                       )}
-                    </span>
-                  </Link>
-                ))}
-              </div>
+                      <span className="min-w-0">
+                        <span className="block text-sm font-semibold text-ink-900 transition group-hover/i:text-brand-700">
+                          {it.title}
+                        </span>
+                        {it.desc && (
+                          <span className="mt-0.5 block text-xs leading-relaxed text-ink-500 line-clamp-2">
+                            {it.desc}
+                          </span>
+                        )}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -199,16 +299,34 @@ export function SiteHeader() {
               </Link>
               {item.mega && (
                 <div className="ml-3 border-l border-ink-200 pl-3">
-                  {MEGA[item.mega].items.map((c) => (
-                    <Link
-                      key={c.href}
-                      href={c.href}
-                      className="block rounded-md px-3 py-1.5 text-sm text-ink-600"
-                      onClick={() => setMobile(false)}
-                    >
-                      {c.title}
-                    </Link>
-                  ))}
+                  {MEGA[item.mega].sections
+                    ? MEGA[item.mega].sections!.map((sec) => (
+                        <div key={sec.title}>
+                          <p className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent-700">
+                            {sec.title}
+                          </p>
+                          {sec.items.map((c) => (
+                            <Link
+                              key={c.href}
+                              href={c.href}
+                              className="block rounded-md px-3 py-1.5 text-sm text-ink-600"
+                              onClick={() => setMobile(false)}
+                            >
+                              {c.title}
+                            </Link>
+                          ))}
+                        </div>
+                      ))
+                    : MEGA[item.mega].items?.map((c) => (
+                        <Link
+                          key={c.href}
+                          href={c.href}
+                          className="block rounded-md px-3 py-1.5 text-sm text-ink-600"
+                          onClick={() => setMobile(false)}
+                        >
+                          {c.title}
+                        </Link>
+                      ))}
                 </div>
               )}
             </div>
