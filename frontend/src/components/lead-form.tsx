@@ -13,14 +13,25 @@ export interface Field {
   full?: boolean;
 }
 
+const fieldClass = {
+  light:
+    "w-full rounded-lg border border-ink-300 px-3.5 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100",
+  dark:
+    "w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-ink-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/30",
+};
+
 export function LeadForm({
   formKey,
   fields,
   submitLabel = "Send",
+  tone = "light",
+  className,
 }: {
   formKey: string;
   fields: Field[];
   submitLabel?: string;
+  tone?: "light" | "dark";
+  className?: string;
 }) {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -49,11 +60,25 @@ export function LeadForm({
     );
   }
 
+  const inputClass = fieldClass[tone];
+  const labelClass =
+    tone === "dark"
+      ? "mb-1.5 block text-sm font-medium text-ink-200"
+      : "mb-1.5 block text-sm font-medium text-ink-800";
+
   return (
-    <form onSubmit={onSubmit} className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className={`relative grid gap-5 sm:grid-cols-2 ${className ?? ""}`}>
+      <input
+        type="text"
+        name="_hp"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="pointer-events-none absolute h-0 w-0 opacity-0"
+      />
       {fields.map((f) => (
         <div key={f.name} className={f.full || f.type === "textarea" ? "sm:col-span-2" : ""}>
-          <label htmlFor={f.name} className="mb-1.5 block text-sm font-medium text-ink-800">
+          <label htmlFor={f.name} className={labelClass}>
             {f.label} {f.required && <span className="text-brand-600">*</span>}
           </label>
           {f.type === "textarea" ? (
@@ -62,7 +87,7 @@ export function LeadForm({
               name={f.name}
               required={f.required}
               rows={5}
-              className="w-full rounded-lg border border-ink-300 px-3.5 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+              className={`${inputClass} resize-none`}
             />
           ) : f.type === "select" ? (
             <select
@@ -70,7 +95,7 @@ export function LeadForm({
               name={f.name}
               required={f.required}
               defaultValue=""
-              className="w-full rounded-lg border border-ink-300 bg-white px-3.5 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+              className={`${inputClass} ${tone === "light" ? "bg-white" : ""}`}
             >
               <option value="" disabled>
                 Select…
@@ -87,17 +112,19 @@ export function LeadForm({
               name={f.name}
               type={f.type ?? "text"}
               required={f.required}
-              className="w-full rounded-lg border border-ink-300 px-3.5 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+              className={inputClass}
             />
           )}
         </div>
       ))}
 
       {status === "error" && (
-        <p className="sm:col-span-2 text-sm text-brand-700">{message}</p>
+        <p className={`sm:col-span-2 text-sm ${tone === "dark" ? "text-brand-300" : "text-brand-700"}`}>
+          {message}
+        </p>
       )}
 
-      <div className="sm:col-span-2">
+      <div className={`sm:col-span-2 ${tone === "dark" ? "flex justify-center" : ""}`}>
         <button type="submit" disabled={status === "loading"} className="btn-primary w-full sm:w-auto">
           {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
           {submitLabel}

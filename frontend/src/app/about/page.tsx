@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { LeadForm } from "@/components/lead-form";
 import { PageBanner } from "@/components/page-banner";
 
 export const metadata: Metadata = {
@@ -266,33 +267,18 @@ export default function AboutPage() {
             Together We Rise: Software Engineering for Everyone. Send us a message and let&apos;s
             build something great.
           </p>
-          <form className="mt-10 grid gap-4 text-left sm:grid-cols-2">
-            <input
-              type="text"
-              placeholder="First name"
-              className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-ink-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/30 sm:col-span-1"
-            />
-            <input
-              type="text"
-              placeholder="Last name"
-              className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-ink-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/30 sm:col-span-1"
-            />
-            <input
-              type="email"
-              placeholder="Email address"
-              className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-ink-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/30 sm:col-span-2"
-            />
-            <textarea
-              placeholder="Your message"
-              rows={4}
-              className="resize-none rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-ink-400 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/30 sm:col-span-2"
-            />
-            <div className="sm:col-span-2 flex justify-center">
-              <button type="submit" className="btn-primary px-10">
-                Join the Mission <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </form>
+          <LeadForm
+            formKey="about-mission"
+            tone="dark"
+            className="mt-10 text-left"
+            submitLabel="Join the Mission"
+            fields={[
+              { name: "first_name", label: "First name", required: true },
+              { name: "last_name", label: "Last name", required: true },
+              { name: "email", label: "Email address", type: "email", required: true, full: true },
+              { name: "message", label: "Your message", type: "textarea", required: true },
+            ]}
+          />
         </div>
       </section>
     </>

@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check-links": "node scripts/check-links.mjs",
+    "check-links:prod": "node scripts/check-links.mjs https://redcloudsystems.com"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -121,7 +121,6 @@ const MEGA: Record<string, Mega> = {
       {
         title: "Compliance Solutions",
         items: [
-          { icon: "Shield",        title: "Compliance Overview",        desc: "Reduce risk, improve security, and prepare for audits.",           href: "/compliance" },
           { icon: "HeartPulse",    title: "HIPAA Readiness",            desc: "Protect patient data and healthcare information.",                 href: "/compliance/hipaa" },
           { icon: "BadgeCheck",    title: "SOC 2 Readiness",            desc: "Demonstrate security and operational maturity.",                   href: "/compliance/soc2" },
           { icon: "Globe",         title: "ISO 27001",                  desc: "Structured information security management.",                      href: "/compliance/iso27001" },
@@ -134,9 +133,9 @@ const MEGA: Record<string, Mega> = {
         title: "Compliance Automation",
         items: [
           { icon: "Bell",          title: "AI Compliance Monitoring",   desc: "Never miss a regulatory change — automated alerts.",              href: "/landing/ai-compliance" },
-          { icon: "Search",        title: "Security Assessments",       desc: "Identify vulnerabilities and compliance gaps.",                    href: "/compliance#security-assessments" },
-          { icon: "FileText",      title: "Policy & Documentation",     desc: "Develop policies, procedures, and operational controls.",          href: "/compliance#policy" },
-          { icon: "RefreshCw",     title: "Ongoing Compliance Support", desc: "Maintain and improve your compliance posture over time.",          href: "/compliance#ongoing-support" },
+          { icon: "Search",        title: "Security Assessments",       desc: "Identify vulnerabilities and compliance gaps.",                    href: "/landing/security-assessments" },
+          { icon: "FileText",      title: "Policy & Documentation",     desc: "Develop policies, procedures, and operational controls.",          href: "/landing/policy-documentation" },
+          { icon: "RefreshCw",     title: "Ongoing Compliance Support", desc: "Maintain and improve your compliance posture over time.",          href: "/landing/ongoing-compliance-support" },
         ],
       },
     ],

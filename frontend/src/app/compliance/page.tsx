@@ -97,22 +97,22 @@ const automationServices = [
     icon: Search,
     name: "Security Assessments",
     desc: "A comprehensive review of your environment, systems, and operations — delivered as a risk summary, gap analysis, and prioritized remediation roadmap.",
-    href: "#contact",
-    cta: "Get an assessment",
+    href: "/landing/security-assessments",
+    cta: "Learn more",
   },
   {
     icon: FileText,
     name: "Policy & Documentation",
     desc: "We write and implement the policies, procedures, and operational controls required by your compliance framework — ready for auditor review.",
-    href: "#contact",
-    cta: "Get started",
+    href: "/landing/policy-documentation",
+    cta: "Learn more",
   },
   {
     icon: RefreshCw,
     name: "Ongoing Compliance Support",
     desc: "Monthly monitoring, security improvements, documentation maintenance, and continuous improvement — so compliance doesn't decay after certification.",
-    href: "#contact",
-    cta: "Get started",
+    href: "/landing/ongoing-compliance-support",
+    cta: "Learn more",
   },
 ];
 

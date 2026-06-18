@@ -78,7 +78,7 @@ const solutions: Solution[] = [
       { label: "PCI DSS",             href: "/compliance/pci-dss" },
       { label: "NIST",                href: "/compliance/nist" },
       { label: "CMMC",                href: "/compliance/cmmc" },
-      { label: "Security Assessments", href: "/compliance" },
+      { label: "Security Assessments", href: "/landing/security-assessments" },
       { label: "Compliance Automation", href: "/landing/ai-compliance" },
     ],
     execQuestion: "How do we reduce organizational risk?",

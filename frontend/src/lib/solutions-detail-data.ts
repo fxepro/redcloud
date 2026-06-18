@@ -756,7 +756,13 @@ export const solutionDetails: SolutionDetail[] = [
           title: "Security Assessments",
           description: "Identify vulnerabilities before attackers do.",
           bullets: ["Infrastructure reviews", "Cloud security assessments", "Application security reviews", "Risk prioritization"],
-          href: "/compliance",
+          href: "/landing/security-assessments",
+        },
+        {
+          title: "Policy & Documentation",
+          description: "Develop policies, procedures, and governance documentation for audit readiness.",
+          bullets: ["Security policies", "Operational procedures", "Incident response plans", "Access control policies"],
+          href: "/landing/policy-documentation",
         },
         {
           title: "Compliance Automation",
@@ -765,16 +771,10 @@ export const solutionDetails: SolutionDetail[] = [
           href: "/landing/ai-compliance",
         },
         {
-          title: "AI Compliance Monitoring",
-          description: "Monitor regulatory developments and compliance obligations using AI-driven systems.",
-          bullets: ["Regulatory tracking", "Executive summaries", "Risk alerts", "Policy monitoring"],
-          href: "/landing/ai-compliance",
-        },
-        {
           title: "Ongoing Compliance Support",
           description: "Maintain and improve compliance readiness over time.",
           bullets: ["Quarterly reviews", "Security monitoring", "Documentation updates", "Audit preparation"],
-          href: "/compliance",
+          href: "/landing/ongoing-compliance-support",
         },
       ],
     },

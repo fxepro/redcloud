@@ -75,22 +75,20 @@ export async function getRelatedPosts(post: Post): Promise<Post[]> {
   return all.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3);
 }
 
-/** Submit a lead form to the Laravel backend. */
+/** Submit a lead form to the Laravel backend or the built-in Next.js handler. */
 export async function submitLead(
   formKey: string,
   payload: Record<string, unknown>,
 ): Promise<{ ok: boolean; message: string }> {
-  if (!API) {
-    // No backend wired yet — simulate success so the UI is testable.
-    return { ok: true, message: "Thanks — we'll be in touch shortly." };
-  }
+  const endpoint = API ? `${API}/api/forms/${formKey}` : `/api/forms/${formKey}`;
+
   try {
-    const res = await fetch(`${API}/api/forms/${formKey}`, {
+    const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload),
     });
-    const data = await res.json().catch(() => ({}));
+    const data = (await res.json().catch(() => ({}))) as { message?: string };
     if (!res.ok) {
       return { ok: false, message: data.message ?? "Something went wrong. Please try again." };
     }

@@ -5,7 +5,7 @@ Public marketing site for Redcloud Systems. Next.js 15 (App Router) + TypeScript
 ## Architecture
 
 - **Content layer** lives in `src/lib/api.ts`. When `NEXT_PUBLIC_API_URL` is set it fetches from the Laravel backend; otherwise it serves the bundled seed content in `src/lib/content.ts`, so the site builds and runs standalone.
-- **Forms** post to `POST {API}/api/forms/{key}` via `submitLead()`. With no API configured they resolve optimistically for local testing.
+- **Forms** post to `POST /api/forms/{key}` via `submitLead()` (or Laravel when `NEXT_PUBLIC_API_URL` is set). Delivered by [Web3Forms](https://web3forms.com) — free, no credit card.
 - **SEO**: per-page metadata, `sitemap.ts`, `robots.ts`. Slugs mirror the existing WordPress URLs for redirect-free SEO continuity.
 
 ## Routes
@@ -42,4 +42,5 @@ npm run build && npm start
 |---|---|
 | `NEXT_PUBLIC_API_URL` | Laravel API base (Railway). Empty = use bundled seed content. |
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL for metadata/sitemap. |
+| `WEB3FORMS_ACCESS_KEY` | Web3Forms access key (free at web3forms.com). Delivers form submissions to your inbox. |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile key for form spam protection. |
