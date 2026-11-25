@@ -26,7 +26,11 @@ export const site = {
   description:
     "Redcloud Systems is a corporate software engineering company building custom software, AI automation, and digital products for businesses across industries.",
   email: "hello@redcloudsystems.com",
-  phone: "+1 (000) 000-0000",
+  /** Leave empty until there's a real number; pages hide the phone line when blank. */
+  phone: "",
+  /** Service areas (no street address published). */
+  locations: ["Colorado Springs, CO", "Denver, CO"],
+  locationSummary: "Colorado Springs & Denver, Colorado — meeting clients nationwide",
 };
 
 export const services: Service[] = [

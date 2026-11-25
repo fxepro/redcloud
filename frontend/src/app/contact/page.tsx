@@ -37,8 +37,10 @@ export default function ContactPage() {
             <h3 className="font-semibold text-ink-900">Get in touch</h3>
             <ul className="mt-4 space-y-4 text-sm text-ink-700">
               <li className="flex items-center gap-3"><Mail className="h-5 w-5 text-brand-600" /> {site.email}</li>
-              <li className="flex items-center gap-3"><Phone className="h-5 w-5 text-brand-600" /> {site.phone}</li>
-              <li className="flex items-center gap-3"><MapPin className="h-5 w-5 text-brand-600" /> Remote-first, worldwide</li>
+              {site.phone && (
+                <li className="flex items-center gap-3"><Phone className="h-5 w-5 text-brand-600" /> {site.phone}</li>
+              )}
+              <li className="flex items-start gap-3"><MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" /> {site.locationSummary}</li>
             </ul>
           </div>
         </aside>

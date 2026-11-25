@@ -4,6 +4,7 @@ import "./globals.css";
 import { TopBar } from "@/components/top-bar";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ChatWidget } from "@/components/chat-widget";
 import { site } from "@/lib/content";
 
 const sans = Inter({
@@ -46,6 +47,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <ChatWidget />
       </body>
     </html>
   );

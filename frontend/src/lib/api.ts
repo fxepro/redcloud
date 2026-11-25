@@ -76,23 +76,84 @@ export async function getRelatedPosts(post: Post): Promise<Post[]> {
 }
 
 /** Submit a lead form to the Laravel backend or the built-in Next.js handler. */
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
+const humanize = (key: string) =>
+  key
+    .split(/[-_]+/)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+
+/**
+ * Submit a lead form.
+ * Web3Forms' free plan only accepts browser-side submissions (server-side needs Pro),
+ * so this posts straight from the visitor's browser. The access key is public by design:
+ * it can only deliver mail to the inbox registered for it.
+ */
 export async function submitLead(
   formKey: string,
   payload: Record<string, unknown>,
 ): Promise<{ ok: boolean; message: string }> {
-  const endpoint = API ? `${API}/api/forms/${formKey}` : `/api/forms/${formKey}`;
+  const thanks = "Thanks — we'll be in touch shortly.";
+
+  if (payload._hp) return { ok: true, message: thanks }; // honeypot: silently drop bots
+
+  const email = String(payload.email ?? "").trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { ok: false, message: "Please enter a valid email address." };
+  }
+
+  // A future backend (NEXT_PUBLIC_API_URL) takes over delivery when configured.
+  if (API) {
+    try {
+      const res = await fetch(`${API}/api/forms/${formKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json().catch(() => ({}))) as { message?: string };
+      return res.ok
+        ? { ok: true, message: data.message ?? thanks }
+        : { ok: false, message: data.message ?? "Something went wrong. Please try again." };
+    } catch {
+      return { ok: false, message: "Network error. Please try again." };
+    }
+  }
+
+  if (!WEB3FORMS_KEY) {
+    console.error("[forms] NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY is not configured");
+    return {
+      ok: false,
+      message: "Form delivery is not configured yet. Please email hello@redcloudsystems.com directly.",
+    };
+  }
+
+  const fields = Object.fromEntries(
+    Object.entries(payload).filter(
+      ([key, value]) => !key.startsWith("_") && value != null && String(value).trim() !== "",
+    ),
+  );
+  const name = String(payload.name ?? payload.first_name ?? "").trim();
 
   try {
-    const res = await fetch(endpoint, {
+    const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: `[Redcloud] ${humanize(formKey)} — ${name || email}`,
+        from_name: name || "Website visitor",
+        form_key: formKey,
+        page: typeof window !== "undefined" ? window.location.pathname : undefined,
+        ...fields,
+      }),
     });
-    const data = (await res.json().catch(() => ({}))) as { message?: string };
-    if (!res.ok) {
-      return { ok: false, message: data.message ?? "Something went wrong. Please try again." };
+    const data = (await res.json().catch(() => ({}))) as { success?: boolean; message?: string };
+    if (!res.ok || !data.success) {
+      console.error("[forms] Web3Forms error:", data.message ?? res.status);
+      return { ok: false, message: "Something went wrong. Please try again or email hello@redcloudsystems.com." };
     }
-    return { ok: true, message: data.message ?? "Thanks — we'll be in touch shortly." };
+    return { ok: true, message: thanks };
   } catch {
     return { ok: false, message: "Network error. Please try again." };
   }

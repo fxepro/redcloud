@@ -91,6 +91,7 @@ export function SiteFooter() {
           <Logo light />
           <p className="mt-4 max-w-md text-sm text-ink-400">{site.description}</p>
           <p className="mt-2 text-sm text-ink-400">{site.email}</p>
+          <p className="mt-1 text-sm text-ink-400">{site.locations.join(" · ")}</p>
         </div>
         <div className="lg:col-span-2">
           <h3 className="text-sm font-semibold text-white">Company</h3>
