@@ -10,7 +10,8 @@ deployed on **Netlify**.
 ## Architecture
 
 - **Content layer** lives in `src/lib/api.ts`. When `NEXT_PUBLIC_API_URL` points at **`backend/`**, content is fetched from the API; otherwise bundled seed in `src/lib/content.ts`.
-- **Forms** post via `submitLead()` to **`backend/`** (`POST /api/forms/{key}`) when configured; interim fallback: `src/app/api/forms/` or Web3Forms.
+- **Forms** post via `submitLead()` to **`backend/`** (`POST /api/forms/{key}`) when configured; otherwise straight from the browser to Web3Forms (the free plan rejects server-side posts).
+- **Chat assistant**: `src/components/chat-widget.tsx` → `src/app/api/chat/route.ts` (Claude), grounded in `src/lib/chat-knowledge.ts`.
 - **SEO**: per-page metadata, `sitemap.ts`, `robots.ts`. Slugs mirror the existing WordPress URLs for redirect-free SEO continuity.
 
 ## Routes
@@ -48,5 +49,6 @@ npm run build && npm start
 |---|---|
 | `NEXT_PUBLIC_API_URL` | **`backend/`** API base. Empty = bundled seed content + frontend form fallback. |
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL for metadata/sitemap. |
-| `WEB3FORMS_ACCESS_KEY` | Web3Forms access key (free at web3forms.com). Delivers form submissions to your inbox. |
+| `WEB3FORMS_ACCESS_KEY` | Web3Forms form access key (public; account hello@redcloudsystems.com). Inlined into the client at build time — redeploy after changing it, and don't mark it secret in Netlify. |
+| `ANTHROPIC_API_KEY` | Claude API key for the chat assistant (server-only; secret in Netlify, scope must include Functions). |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile key for form spam protection. |
