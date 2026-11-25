@@ -8,7 +8,8 @@ import { CtaBanner } from "@/components/cta";
 import { Reviews } from "@/components/reviews";
 import { getServices, getIndustries, getPosts, getAiSolutions, getPortfolio } from "@/lib/api";
 import { reviews, reviewSummary } from "@/lib/reviews";
-
+import { CampaignHero } from "@/components/decorative";
+import { StepGrid } from "@/components/step-grid";
 const stats = [
   { value: "20+", label: "Years enterprise software experience" },
   { value: "15+", label: "Years consumer & small-business software" },
@@ -34,9 +35,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-accent-50 to-white">
-        <div className="pointer-events-none absolute -left-40 -top-40 h-[28rem] w-[28rem] rounded-full bg-accent-200/45 blur-3xl" />
-        <div className="pointer-events-none absolute -right-32 top-20 h-96 w-96 rounded-full bg-accent-100/70 blur-3xl" />
+      <CampaignHero gradient="accent" orbPreset="site-home">
         <div className="container relative grid items-center gap-14 py-20 lg:grid-cols-12 lg:py-28">
           <div className="lg:col-span-7">
             <p className="eyebrow">Software Engineering · AI Automation</p>
@@ -87,7 +86,7 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </CampaignHero>
 
       {/* Partner strip */}
       {(() => {
@@ -150,15 +149,7 @@ export default async function HomePage() {
             description="No black boxes. You see progress every week and own everything we build."
             light
           />
-          <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-accent-800 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s) => (
-              <div key={s.n} className="bg-accent-950 p-8">
-                <span className="font-display text-4xl text-brand-500">{s.n}</span>
-                <h3 className="mt-4 text-xl !text-cream">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-400">{s.body}</p>
-              </div>
-            ))}
-          </div>
+          <StepGrid steps={steps} tone="navy" className="mt-14" />
         </div>
       </section>
 

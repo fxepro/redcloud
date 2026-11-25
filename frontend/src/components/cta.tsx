@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { CtaPanel } from "./decorative";
 
 export function CtaBanner() {
   return (
     <section className="container py-20">
-      <div className="relative overflow-hidden rounded-[2rem] bg-accent-950 px-8 py-16 text-center sm:px-16">
-        <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-brand-600/30 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-accent-500/20 blur-3xl" />
-        <div className="relative mx-auto max-w-2xl">
+      <CtaPanel>
+        <div className="mx-auto max-w-2xl text-center">
           <p className="eyebrow justify-center !text-brand-300">Let&apos;s build</p>
           <h2 className="mt-4 text-balance text-3xl !text-cream sm:text-4xl">
             Tell us what you&apos;re trying to build.
@@ -25,7 +24,7 @@ export function CtaBanner() {
             </Link>
           </div>
         </div>
-      </div>
+      </CtaPanel>
     </section>
   );
 }

@@ -21,7 +21,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const solution = getSolutionDetail(slug);
   if (!solution) return {};
-  return { title: solution.title, description: solution.tagline };
+  return { title: `${solution.title} Solutions`, description: solution.tagline };
 }
 
 export default async function SolutionDetail({

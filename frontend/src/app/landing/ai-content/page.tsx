@@ -12,9 +12,10 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
-
+import { CampaignHero } from "@/components/decorative";
+import { StepGrid } from "@/components/step-grid";
 export const metadata: Metadata = {
-  title: "AI Content & Marketing Factory — Redcloud Systems",
+  title: "AI Content & Marketing Factory",
   description:
     "Generate blog posts, newsletters, social media, and more at scale. AI-powered content creation with a Research → Draft → Review → Publish workflow — largely automated.",
 };
@@ -84,10 +85,7 @@ export default function AIContentPage() {
   return (
     <>
       {/* ── Sections 1–3: Headline + Visual ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[32rem] w-[32rem] rounded-full bg-brand-100/40 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-sand-100/60 blur-3xl" />
-
+      <CampaignHero gradient="brand">
         <div className="container relative grid items-center gap-16 py-28 lg:grid-cols-2 lg:gap-20 lg:py-36">
           {/* Left — headline */}
           <div>
@@ -145,7 +143,7 @@ export default function AIContentPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CampaignHero>
 
       {/* ── Section 4: Problem (dark) ── */}
       <section className="bg-ink-950 py-28">
@@ -279,15 +277,7 @@ export default function AIContentPage() {
               From audit to first published batch — typically 2–3 weeks.
             </p>
           </div>
-          <div className="mt-16 grid gap-px overflow-hidden rounded-3xl bg-ink-800 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s) => (
-              <div key={s.n} className="bg-ink-900 p-8">
-                <span className="font-display text-4xl font-bold text-brand-400">{s.n}</span>
-                <h3 className="mt-4 text-xl text-cream">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-400">{s.body}</p>
-              </div>
-            ))}
-          </div>
+          <StepGrid steps={steps} tone="dark" className="mt-16" />
         </div>
       </section>
 

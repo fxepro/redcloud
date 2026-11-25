@@ -12,9 +12,10 @@ import {
   ClipboardList,
 } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
-
+import { CampaignHero } from "@/components/decorative";
+import { StepGrid } from "@/components/step-grid";
 export const metadata: Metadata = {
-  title: "Security Assessments — Redcloud Systems",
+  title: "Security Assessments",
   description:
     "Identify risks before they become incidents. Security assessments that reveal vulnerabilities, compliance gaps, and prioritized remediation — for audits, customers, and stronger defenses.",
 };
@@ -118,10 +119,7 @@ export default function SecurityAssessmentsPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-ink-50 to-white">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[32rem] w-[32rem] rounded-full bg-accent-100/40 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-ink-100/60 blur-3xl" />
-
+      <CampaignHero gradient="ink">
         <div className="container relative grid items-center gap-16 py-28 lg:grid-cols-2 lg:gap-20 lg:py-36">
           <div>
             <p className="eyebrow">Security Assessments</p>
@@ -178,7 +176,7 @@ export default function SecurityAssessmentsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CampaignHero>
 
       {/* ── Common challenges ── */}
       <section className="bg-accent-900 py-28">
@@ -278,15 +276,7 @@ export default function SecurityAssessmentsPage() {
             Practical assessments designed for leadership, IT, and compliance teams.
           </p>
         </div>
-        <div className="mt-16 grid gap-px overflow-hidden rounded-3xl bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.n} className="bg-white p-8">
-              <span className="font-display text-4xl font-bold text-accent-700">{s.n}</span>
-              <h3 className="mt-4 text-xl">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.body}</p>
-            </div>
-          ))}
-        </div>
+        <StepGrid steps={steps} className="mt-16" />
       </section>
 
       {/* ── Outcomes ── */}

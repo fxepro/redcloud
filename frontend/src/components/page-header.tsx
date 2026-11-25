@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { BlurOrbs } from "./decorative";
 
 export function PageHeader({
   eyebrow,
@@ -14,8 +15,7 @@ export function PageHeader({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-ink-200/70 bg-sand-100">
-      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-200/40 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-accent-200/30 blur-3xl" />
+      <BlurOrbs preset="page-header" />
       <div className="container relative py-16 lg:py-20">
         {breadcrumbs && (
           <nav className="mb-5 flex items-center gap-1 text-sm text-ink-500">

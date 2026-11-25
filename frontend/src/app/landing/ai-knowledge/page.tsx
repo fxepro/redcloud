@@ -12,9 +12,10 @@ import {
   Zap,
 } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
-
+import { CampaignHero } from "@/components/decorative";
+import { StepGrid } from "@/components/step-grid";
 export const metadata: Metadata = {
-  title: "AI Knowledge Assistant — Redcloud Systems",
+  title: "AI Knowledge Assistant",
   description:
     "Turn your company's PDFs, emails, and internal documents into instant answers. Private AI trained on your business knowledge — no data leaves your organization.",
 };
@@ -109,10 +110,7 @@ export default function AIKnowledgePage() {
   return (
     <>
       {/* ── Sections 1–3: Headline + Visual ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-accent-100 to-white">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[32rem] w-[32rem] rounded-full bg-accent-200/50 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-accent-100/70 blur-3xl" />
-
+      <CampaignHero gradient="accent-strong">
         <div className="container relative grid items-center gap-16 py-28 lg:grid-cols-2 lg:gap-20 lg:py-36">
           {/* Left — headline */}
           <div>
@@ -170,7 +168,7 @@ export default function AIKnowledgePage() {
             </div>
           </div>
         </div>
-      </section>
+      </CampaignHero>
 
       {/* ── Section 4: Problem (navy dark) ── */}
       <section className="bg-accent-900 py-28">
@@ -281,15 +279,7 @@ export default function AIKnowledgePage() {
             Most implementations go live in 2–4 weeks.
           </p>
         </div>
-        <div className="mt-16 grid gap-px overflow-hidden rounded-3xl bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.n} className="bg-white p-8">
-              <span className="font-display text-4xl font-bold text-accent-700">{s.n}</span>
-              <h3 className="mt-4 text-xl">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.body}</p>
-            </div>
-          ))}
-        </div>
+        <StepGrid steps={steps} className="mt-16" />
       </section>
 
       {/* ── Section 8: Proof — Industries ── */}

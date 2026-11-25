@@ -12,9 +12,10 @@ import {
   Building2,
 } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
-
+import { CampaignHero } from "@/components/decorative";
+import { StepGrid } from "@/components/step-grid";
 export const metadata: Metadata = {
-  title: "Policy & Documentation — Redcloud Systems",
+  title: "Policy & Documentation",
   description:
     "Build the governance foundation behind compliance. Practical policies, procedures, and operational documentation for HIPAA, SOC 2, ISO 27001, PCI DSS, NIST, and CMMC readiness.",
 };
@@ -120,10 +121,7 @@ export default function PolicyDocumentationPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-ink-50 to-white">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[32rem] w-[32rem] rounded-full bg-accent-100/40 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-ink-100/60 blur-3xl" />
-
+      <CampaignHero gradient="ink">
         <div className="container relative grid items-center gap-16 py-28 lg:grid-cols-2 lg:gap-20 lg:py-36">
           <div>
             <p className="eyebrow">Policy & Documentation</p>
@@ -179,7 +177,7 @@ export default function PolicyDocumentationPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CampaignHero>
 
       {/* ── Why documentation matters ── */}
       <section className="bg-accent-900 py-28">
@@ -271,15 +269,7 @@ export default function PolicyDocumentationPage() {
             From gap review to implementation-aligned policies your team can actually use.
           </p>
         </div>
-        <div className="mt-16 grid gap-px overflow-hidden rounded-3xl bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.n} className="bg-white p-8">
-              <span className="font-display text-4xl font-bold text-accent-700">{s.n}</span>
-              <h3 className="mt-4 text-xl">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.body}</p>
-            </div>
-          ))}
-        </div>
+        <StepGrid steps={steps} className="mt-16" />
       </section>
 
       {/* ── Framework support ── */}

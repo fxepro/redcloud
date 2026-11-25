@@ -11,7 +11,7 @@ import { LeadForm } from "@/components/lead-form";
 import type { ServiceOffering } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "Compliance Solutions — Redcloud Systems",
+  title: "Compliance Solutions",
   description:
     "Reduce risk, improve security, and prepare for audits. HIPAA, SOC 2, ISO 27001, PCI DSS, NIST, and CMMC readiness programs plus AI-powered compliance automation.",
 };

@@ -12,9 +12,9 @@ import {
   Zap,
 } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
-
+import { CampaignHero } from "@/components/decorative";
 export const metadata: Metadata = {
-  title: "Startup MVP Program — Redcloud Systems",
+  title: "Startup MVP Program",
   description:
     "Launch your SaaS, marketplace, or customer portal in 30–60 days. Production-ready MVP built on Next.js, Laravel, and Railway. Validate your idea before burning your runway.",
 };
@@ -96,10 +96,7 @@ export default function StartupMVPPage() {
   return (
     <>
       {/* ── Sections 1–3: Headline + Visual ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-accent-50 to-white">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[32rem] w-[32rem] rounded-full bg-brand-100/30 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-accent-200/40 blur-3xl" />
-
+      <CampaignHero gradient="accent">
         <div className="container relative grid items-center gap-16 py-28 lg:grid-cols-2 lg:gap-20 lg:py-36">
           {/* Left — headline */}
           <div>
@@ -157,7 +154,7 @@ export default function StartupMVPPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CampaignHero>
 
       {/* ── Section 4: Problem (dark) ── */}
       <section className="bg-ink-950 py-28">

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, AlertTriangle, Gauge, TrendingUp, DollarSign, Shield } from "lucide-react";
 import { LeadForm } from "@/components/lead-form";
-
+import { CampaignHero } from "@/components/decorative";
+import { StepGrid } from "@/components/step-grid";
 export const metadata: Metadata = {
-  title: "Performance Optimization Program — Redcloud Systems",
+  title: "Performance Optimization Program",
   description:
     "Slow applications cost you users, revenue, and search rankings. We diagnose and fix performance problems across your entire stack.",
 };
@@ -59,10 +60,7 @@ export default function PerformanceLandingPage() {
     <>
       {/* ── Sections 1–3: Headline + Subheadline + Before/After ── */}
       {/* Signature color: sand-200 (warm neutral, deeper than sand-100) */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sand-200 to-white">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-[32rem] w-[32rem] rounded-full bg-accent-100/50 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 top-16 h-80 w-80 rounded-full bg-brand-100/40 blur-3xl" />
-
+      <CampaignHero gradient="sand-deep">
         <div className="container relative grid items-center gap-16 py-28 lg:grid-cols-2 lg:gap-20 lg:py-36">
           {/* Left */}
           <div>
@@ -120,7 +118,7 @@ export default function PerformanceLandingPage() {
             </div>
           </div>
         </div>
-      </section>
+      </CampaignHero>
 
       {/* ── Section 4: Problem ── */}
       <section className="bg-ink-950 py-28">
@@ -216,15 +214,7 @@ export default function PerformanceLandingPage() {
             Most clients see measurable performance improvements within the first sprint.
           </p>
         </div>
-        <div className="mt-16 grid gap-px overflow-hidden rounded-3xl bg-ink-200 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.n} className="bg-white p-8">
-              <span className="font-display text-4xl font-bold text-brand-600">{s.n}</span>
-              <h3 className="mt-4 text-xl">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.body}</p>
-            </div>
-          ))}
-        </div>
+        <StepGrid steps={steps} className="mt-16" />
       </section>
 
       {/* ── Section 8: Proof ── */}
