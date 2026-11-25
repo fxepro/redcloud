@@ -72,7 +72,7 @@ export default function AiCustomerServiceLandingPage() {
             <p className="eyebrow">AI Customer Service Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Answer Every Customer Question Instantly —{" "}
-              <span className="italic text-brand-600">24/7, Across Chat and Voice.</span>
+              <span className="text-brand-600">24/7, Across Chat and Voice.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We deploy AI customer service agents that handle inbound questions, resolve tier-1

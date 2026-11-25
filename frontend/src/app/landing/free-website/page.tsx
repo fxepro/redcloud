@@ -80,7 +80,7 @@ export default function FreeWebsitePage() {
             <p className="eyebrow">Free Business Website Initiative</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Get Your Business Online{" "}
-              <span className="italic text-brand-600">This Week. Free.</span>
+              <span className="text-brand-600">This Week. Free.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               A professional website — contact form, mobile design, Google Maps, and basic SEO —

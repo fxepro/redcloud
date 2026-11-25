@@ -80,7 +80,7 @@ export default function AutomationLandingPage() {
             <p className="eyebrow">Business Automation Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Eliminate Repetitive Work Across Your Entire{" "}
-              <span className="italic text-brand-600">Business.</span>
+              <span className="text-brand-600">Business.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We automate the manual, rule-based processes that eat your team&apos;s time — form

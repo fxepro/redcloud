@@ -128,7 +128,7 @@ export default function OngoingComplianceSupportPage() {
             <p className="eyebrow">Ongoing Compliance Support</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Compliance Is Not A Project.{" "}
-              <span className="italic text-accent-700">It&apos;s A Continuous Program.</span>
+              <span className="text-accent-700">It&apos;s A Continuous Program.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               Staying compliant is often harder than becoming compliant. Redcloud Systems provides

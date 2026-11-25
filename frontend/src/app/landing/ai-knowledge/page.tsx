@@ -117,7 +117,7 @@ export default function AIKnowledgePage() {
             <p className="eyebrow">AI Knowledge Assistant</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Your Company Docs.{" "}
-              <span className="italic text-accent-700">Answered Instantly.</span>
+              <span className="text-accent-700">Answered Instantly.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               Stop watching employees burn hours searching for files, policies, and past

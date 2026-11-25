@@ -59,10 +59,16 @@ const config: Config = {
           100: "#f2f8f9",
           200: "#e2eff0",
         },
+        // Homepage surfaces: ~20% deeper and bluer than sand (hue ~214°)
+        mist: {
+          100: "#e4ecf6",
+          200: "#d5e1f0",
+          300: "#b9cce6",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Georgia", "serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
       },
       // Type scale — content sizes 32→16 (16px is the hard floor).
       // 5xl–7xl are display sizes (hero) above the content scale.

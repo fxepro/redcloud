@@ -72,7 +72,7 @@ export default function LegacyLandingPage() {
             <p className="eyebrow">Legacy Application Modernization Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Modernize Outdated Software Without Losing Your{" "}
-              <span className="italic text-brand-600">Data, Your Users, or Your Business.</span>
+              <span className="text-brand-600">Data, Your Users, or Your Business.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We replace aging, unsupported applications with modern, maintainable systems —

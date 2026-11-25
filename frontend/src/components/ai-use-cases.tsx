@@ -1,18 +1,24 @@
 import { CheckCircle2 } from "lucide-react";
 import { Icon, iconForText } from "./icon";
 import { SectionHeading } from "./section";
+import { PatternPanel } from "./decorative";
 import type { AiUseCase } from "@/lib/types";
 
-/** Gradient-header card: AI capabilities (check bullets) + the platforms we use (pills). */
-function UseCaseCard({ useCase }: { useCase: AiUseCase }) {
+/** Patterned-header card: AI capabilities (check bullets) + the platforms we use (pills). */
+function UseCaseCard({ useCase, index, image }: { useCase: AiUseCase; index: number; image?: string }) {
+  const icon = iconForText(useCase.category + " " + useCase.capabilities.join(" "));
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-soft transition hover:-translate-y-1 hover:shadow-lift">
-      <div className="flex items-center gap-3 bg-gradient-to-r from-accent-900 to-brand-800 px-6 py-5 text-white">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/20">
-          <Icon name={iconForText(useCase.category + " " + useCase.capabilities.join(" "))} className="h-5 w-5" />
+      <PatternPanel index={index} image={image} className="flex min-h-[7.5rem] items-end gap-3 px-6 pb-5 pt-8">
+        <Icon
+          name={icon}
+          className="pointer-events-none absolute -right-4 -top-4 h-28 w-28 text-white/[0.07] transition duration-500 group-hover:rotate-6 group-hover:text-white/10"
+        />
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-600 shadow-lift ring-1 ring-white/20">
+          <Icon name={icon} className="h-5 w-5" />
         </span>
         <h3 className="text-lg !text-white">{useCase.category}</h3>
-      </div>
+      </PatternPanel>
       <div className="flex flex-1 flex-col p-6">
         <ul className="space-y-2.5">
           {useCase.capabilities.map((c) => (
@@ -48,18 +54,21 @@ export function AiUseCases({
   items,
   eyebrow = "Use cases",
   title = "Where AI delivers",
+  image,
 }: {
   items: AiUseCase[];
   eyebrow?: string;
   title?: string;
+  /** Vertical photo laid faintly under each card header. */
+  image?: string;
 }) {
   return (
     <section className="bg-ink-50 section">
       <div className="container">
         <SectionHeading center eyebrow={eyebrow} title={title} />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {items.map((u) => (
-            <UseCaseCard key={u.category} useCase={u} />
+          {items.map((u, i) => (
+            <UseCaseCard key={u.category} useCase={u} index={i} image={image} />
           ))}
         </div>
       </div>

@@ -114,7 +114,7 @@ export default function AIVoicePage() {
             <p className="eyebrow">AI Voice Agents</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Never Miss A Lead{" "}
-              <span className="italic text-brand-600">Again.</span>
+              <span className="text-brand-600">Again.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               An AI receptionist that answers every call, routes customers, schedules

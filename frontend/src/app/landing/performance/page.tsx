@@ -67,7 +67,7 @@ export default function PerformanceLandingPage() {
             <p className="eyebrow">Performance Optimization Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Every Second Your App Is Slow,{" "}
-              <span className="italic text-brand-600">You&apos;re Losing Users and Revenue.</span>
+              <span className="text-brand-600">You&apos;re Losing Users and Revenue.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We diagnose and fix performance problems across your entire stack — frontend, API,

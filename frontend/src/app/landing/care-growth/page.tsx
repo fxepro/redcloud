@@ -140,7 +140,7 @@ export default function CareGrowthPage() {
             <p className="eyebrow">Website Care & Growth Plan</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Your Website.{" "}
-              <span className="italic text-accent-700">Professionally Managed.</span>
+              <span className="text-accent-700">Professionally Managed.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               Stop firefighting your own website. A monthly plan that covers updates,

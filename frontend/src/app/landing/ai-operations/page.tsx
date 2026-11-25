@@ -109,7 +109,7 @@ export default function AIOperationsPage() {
             <p className="eyebrow">AI Operations Center</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Ask Your Business{" "}
-              <span className="italic text-accent-700">Any Question.</span>
+              <span className="text-accent-700">Any Question.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               Connect your CRM, ERP, accounting, inventory, and marketing systems into one

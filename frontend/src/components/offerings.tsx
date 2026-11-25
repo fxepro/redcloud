@@ -2,18 +2,24 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Icon, iconForText } from "./icon";
 import { SectionHeading } from "./section";
+import { PatternPanel } from "./decorative";
 import type { ServiceOffering } from "@/lib/types";
 
-/** A single gradient-header offering card. */
-export function OfferingCard({ offering }: { offering: ServiceOffering }) {
+/** Offering card with a patterned navy header (pattern rotates by index). */
+export function OfferingCard({ offering, index = 0 }: { offering: ServiceOffering; index?: number }) {
+  const icon = iconForText(offering.title + " " + offering.description);
   return (
     <div className="group overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-soft transition hover:-translate-y-1 hover:shadow-lift">
-      <div className="flex items-center gap-3 bg-gradient-to-r from-accent-900 to-brand-800 px-6 py-5 text-white">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/20">
-          <Icon name={iconForText(offering.title + " " + offering.description)} className="h-5 w-5" />
+      <PatternPanel index={index} className="flex min-h-[7.5rem] items-end gap-3 px-6 pb-5 pt-8">
+        <Icon
+          name={icon}
+          className="pointer-events-none absolute -right-4 -top-4 h-28 w-28 text-white/[0.07] transition duration-500 group-hover:rotate-6 group-hover:text-white/10"
+        />
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-600 shadow-lift ring-1 ring-white/20">
+          <Icon name={icon} className="h-5 w-5" />
         </span>
         <h3 className="text-lg !text-white">{offering.title}</h3>
-      </div>
+      </PatternPanel>
       <div className="p-6">
         <p className="text-sm leading-relaxed text-ink-600">{offering.description}</p>
         <ul className="mt-4 space-y-2.5">
@@ -54,8 +60,8 @@ export function CoreServices({
       <div className="container">
         <SectionHeading center eyebrow={eyebrow} title={title} />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {items.map((o) => (
-            <OfferingCard key={o.title} offering={o} />
+          {items.map((o, i) => (
+            <OfferingCard key={o.title} offering={o} index={i} />
           ))}
         </div>
         {action && <div className="mt-10 text-center">{action}</div>}

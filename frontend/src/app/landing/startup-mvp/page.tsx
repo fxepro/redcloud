@@ -103,7 +103,7 @@ export default function StartupMVPPage() {
             <p className="eyebrow">Startup MVP Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Launch Your Product{" "}
-              <span className="italic text-brand-600">In 30–60 Days.</span>
+              <span className="text-brand-600">In 30–60 Days.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               SaaS platforms, marketplaces, customer portals, and internal tools — built

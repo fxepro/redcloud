@@ -55,7 +55,7 @@ export default function CloudCostLandingPage() {
             <p className="eyebrow">Cloud Cost Reduction Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Cut Your AWS Bill By Up To 80% Without{" "}
-              <span className="italic text-brand-600">Breaking Your Application.</span>
+              <span className="text-brand-600">Breaking Your Application.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We migrate businesses off expensive, over-complicated AWS infrastructure to

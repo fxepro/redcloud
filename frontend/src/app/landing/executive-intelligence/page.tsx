@@ -72,7 +72,7 @@ export default function ExecutiveIntelligenceLandingPage() {
             <p className="eyebrow">Executive Intelligence Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Know What Your Competitors Are Doing Before{" "}
-              <span className="italic text-brand-600">They Do It to You.</span>
+              <span className="text-brand-600">They Do It to You.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We deploy AI research and monitoring agents that track your competitors, markets,

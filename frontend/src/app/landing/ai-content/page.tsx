@@ -92,7 +92,7 @@ export default function AIContentPage() {
             <p className="eyebrow">AI Content & Marketing Factory</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Publish More.{" "}
-              <span className="italic text-brand-600">Write Less.</span>
+              <span className="text-brand-600">Write Less.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               Blog posts, newsletters, social content, and landing pages — produced at scale

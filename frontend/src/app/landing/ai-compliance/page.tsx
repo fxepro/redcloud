@@ -97,7 +97,7 @@ export default function AICompliancePage() {
             <p className="eyebrow">AI Compliance & Policy Monitoring</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Never Miss A{" "}
-              <span className="italic text-accent-700">Regulatory Change.</span>
+              <span className="text-accent-700">Regulatory Change.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               AI monitors regulations, compliance requirements, and policy changes across

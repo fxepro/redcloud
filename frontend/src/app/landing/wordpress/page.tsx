@@ -61,7 +61,7 @@ export default function WordPressLandingPage() {
             <p className="eyebrow">Website Modernization Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Turn Your Slow WordPress Site Into A{" "}
-              <span className="italic text-brand-600">Lightning-Fast Modern Platform.</span>
+              <span className="text-brand-600">Lightning-Fast Modern Platform.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We help businesses modernize legacy technology, reduce operating costs, and stop

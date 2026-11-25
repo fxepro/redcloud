@@ -35,14 +35,14 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <CampaignHero gradient="accent" orbPreset="site-home">
+      <CampaignHero gradient="mist" orbPreset="site-home">
         <div className="container relative grid items-center gap-14 py-20 lg:grid-cols-12 lg:py-28">
           <div className="lg:col-span-7">
             <p className="eyebrow">Software Engineering · AI Automation</p>
             <h1 className="mt-5 text-5xl leading-[1.1] sm:text-6xl lg:text-7xl">
               Cut Costs. Deploy AI.<br />
               Modernize Operations.<br />
-              <span className="italic text-brand-600">Ensure Compliance.</span>
+              <span className="text-brand-600">Ensure Compliance.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-600">
               We help businesses reduce infrastructure spend, automate workflows,
@@ -154,7 +154,7 @@ export default async function HomePage() {
       </section>
 
       {/* AI */}
-      <section className="bg-sand-100 py-24">
+      <section className="bg-mist-100 py-24">
         <div className="container">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading

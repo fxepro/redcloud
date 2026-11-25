@@ -28,7 +28,7 @@ const cards = [
 
 export function CustomerGrowth() {
   return (
-    <section className="bg-sand-100 section">
+    <section className="bg-mist-100 section">
       <div className="container">
         <SectionHeading
           center

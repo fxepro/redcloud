@@ -76,6 +76,7 @@ export default async function AiDetail({
           items={item.useCases}
           eyebrow="Use cases"
           title={`Where AI delivers in ${nice.toLowerCase()}`}
+          image={item.heroImage}
         />
       )}
 

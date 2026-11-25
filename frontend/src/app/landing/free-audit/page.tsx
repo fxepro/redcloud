@@ -98,7 +98,7 @@ export default function FreeDigitalAuditPage() {
             <p className="eyebrow">Free Digital Audit</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Find The Hidden Revenue{" "}
-              <span className="italic text-accent-700">In Your Business.</span>
+              <span className="text-accent-700">In Your Business.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               Most businesses are losing leads, overpaying for hosting, and sitting on unfixed

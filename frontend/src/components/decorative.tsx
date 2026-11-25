@@ -8,8 +8,8 @@ const BLUR_ORB_PRESETS = {
     "-right-24 top-16 h-80 w-80 bg-brand-100/50",
   ],
   "site-home": [
-    "-left-40 -top-40 h-[28rem] w-[28rem] bg-accent-200/45",
-    "-right-32 top-20 h-96 w-96 bg-accent-100/70",
+    "-left-40 -top-40 h-[28rem] w-[28rem] bg-mist-300/60",
+    "-right-32 top-20 h-96 w-96 bg-accent-400/25",
   ],
   "banner-light": [
     "-right-24 -top-24 h-96 w-96 bg-accent-200/50",
@@ -48,6 +48,7 @@ export function BlurOrbs({ preset }: { preset: BlurOrbPreset }) {
 /** Campaign hero background gradients — token names only. */
 export const CAMPAIGN_GRADIENTS = {
   accent: "from-accent-50 to-white",
+  mist: "from-mist-200 via-mist-100 to-white",
   "accent-strong": "from-accent-100 to-white",
   "accent-muted": "from-accent-200/40 to-white",
   ink: "from-ink-50 to-white",
@@ -90,6 +91,57 @@ export function CtaPanel({ children }: { children: ReactNode }) {
     <div className="relative overflow-hidden rounded-[2rem] bg-accent-950 px-8 py-16 sm:px-16">
       <BlurOrbs preset="cta" />
       <div className="relative">{children}</div>
+    </div>
+  );
+}
+
+/** Rotating line patterns for card headers and image-less tiles. */
+const PATTERNS = ["pattern-circuit", "pattern-grid", "pattern-diagonal", "pattern-rings"] as const;
+
+/** Navy base tints, rotated alongside the pattern so neighbouring cards differ. */
+const PATTERN_TINTS = [
+  "from-accent-950 via-accent-900 to-accent-800",
+  "from-ink-950 via-accent-950 to-accent-900",
+  "from-accent-950 via-accent-900 to-brand-900",
+  "from-navy-950 via-accent-950 to-accent-800",
+] as const;
+
+/**
+ * Dark patterned surface: navy gradient + line pattern + brand glow.
+ * `index` picks the pattern/tint so adjacent cards never look identical.
+ * Optional `image` is laid underneath as a duotone photo.
+ */
+export function PatternPanel({
+  index = 0,
+  image,
+  className,
+  children,
+}: {
+  index?: number;
+  image?: string;
+  className?: string;
+  children?: ReactNode;
+}) {
+  const pattern = PATTERNS[index % PATTERNS.length];
+  const tint = PATTERN_TINTS[index % PATTERN_TINTS.length];
+  return (
+    <div className={cn("relative isolate overflow-hidden bg-gradient-to-br text-white", tint, className)}>
+      {image && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={image}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-25 mix-blend-luminosity"
+        />
+      )}
+      <div aria-hidden className={cn("pointer-events-none absolute inset-0 -z-10 opacity-[0.09]", pattern)} />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-10 -top-12 -z-10 h-40 w-40 rounded-full bg-brand-600/30 blur-3xl"
+      />
+      {children}
     </div>
   );
 }

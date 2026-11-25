@@ -75,7 +75,7 @@ export default function AiWorkforceLandingPage() {
             <p className="eyebrow">AI Workforce Program</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Deploy AI Employees That Work 24/7 So Your Team Can{" "}
-              <span className="italic text-brand-600">Focus On Growth.</span>
+              <span className="text-brand-600">Focus On Growth.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               We design, build, and deploy AI agents into your existing workflows — automating

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Icon } from "./icon";
+import { PatternPanel } from "./decorative";
 import { formatDate } from "@/lib/utils";
 import type { AiSolution, Industry, PortfolioItem, Post, Service } from "@/lib/types";
 
@@ -96,50 +97,49 @@ export function IndustryCard({ industry }: { industry: Industry }) {
   );
 }
 
-const aiGradients = [
-  "from-accent-500 to-accent-900",
-  "from-accent-700 to-navy-950",
-  "from-accent-400 to-accent-700",
-  "from-accent-600 to-navy-900",
-  "from-brand-600 to-brand-800",
-  "from-accent-500 to-accent-800",
-];
-
+/** Full-bleed photo tile for AI verticals: photo + navy scrim + circuit texture. */
 export function AiCard({ item, index = 0 }: { item: AiSolution; index?: number }) {
-  const g = aiGradients[index % aiGradients.length];
   return (
     <Link
       href={`/ai-solutions/${item.slug}`}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${g} p-6 text-white shadow-soft transition hover:-translate-y-1 hover:shadow-lift`}
+      className="group relative flex aspect-[4/3] flex-col sm:aspect-[4/5] justify-end overflow-hidden rounded-2xl bg-accent-950 p-6 text-white shadow-soft transition hover:-translate-y-1 hover:shadow-lift"
     >
-      <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10 blur-2xl" />
-      <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/25">
-        <Icon name="Cpu" className="h-5 w-5" />
+      {item.heroImage ? (
+        <Image
+          src={item.heroImage}
+          alt={item.title}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover transition duration-700 group-hover:scale-105"
+        />
+      ) : (
+        <PatternPanel index={index} className="absolute inset-0" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-accent-950 via-accent-950/70 to-accent-950/10" />
+      <div
+        aria-hidden
+        className="pattern-circuit pointer-events-none absolute inset-0 opacity-[0.07] [mask-image:linear-gradient(to_top,black,transparent_70%)]"
+      />
+      <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold tracking-wide text-white ring-1 ring-white/25 backdrop-blur">
+        <Icon name="Cpu" className="h-3.5 w-3.5" /> AI agents
       </span>
-      <h3 className="relative mt-4 flex items-center justify-between gap-2 text-lg !text-white">
-        {item.title}
-        <ArrowUpRight className="h-5 w-5 shrink-0 text-white/80 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-      </h3>
-      <p className="relative mt-2 flex-1 text-sm leading-relaxed text-white/85">{item.excerpt}</p>
+      <ArrowUpRight className="absolute right-5 top-5 h-5 w-5 text-white/80 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      <div className="relative">
+        <h3 className="text-xl !text-white">{item.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-white/80">{item.excerpt}</p>
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-300">
+          Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+        </span>
+      </div>
     </Link>
   );
 }
 
-// Warm, varied gradient treatments instead of a flat placeholder
-const tileGradients = [
-  "from-brand-700 via-brand-600 to-accent-500",
-  "from-ink-900 via-ink-800 to-brand-800",
-  "from-accent-600 via-brand-600 to-brand-800",
-  "from-brand-800 via-ink-800 to-ink-900",
-];
-
 export function PortfolioCard({ item, index = 0 }: { item: PortfolioItem; index?: number }) {
-  const g = tileGradients[index % tileGradients.length];
   return (
     <Link href={`/portfolio/${item.slug}`} className="group flex flex-col">
-      <div
-        className={`relative flex aspect-[16/11] items-end overflow-hidden rounded-2xl bg-gradient-to-br ${g} p-6 shadow-soft transition group-hover:shadow-lift`}
-      >
+      <div className="relative flex aspect-[16/11] items-end overflow-hidden rounded-2xl bg-accent-950 p-6 shadow-soft transition group-hover:shadow-lift">
+        {!item.featuredImage && <PatternPanel index={index} className="absolute inset-0" />}
         {item.featuredImage && (
           <>
             <Image
@@ -173,7 +173,7 @@ export function PostCard({ post, featured = false }: { post: Post; featured?: bo
       className={`card group flex flex-col ${featured ? "sm:flex-row sm:items-stretch sm:gap-8" : ""}`}
     >
       <div
-        className={`relative overflow-hidden rounded-xl bg-gradient-to-br from-brand-700 to-ink-900 ${
+        className={`relative overflow-hidden rounded-xl bg-accent-950 ${
           featured ? "aspect-[16/10] w-full shrink-0 sm:w-1/2" : "mb-4 aspect-[16/9] w-full"
         }`}
       >
@@ -186,9 +186,9 @@ export function PostCard({ post, featured = false }: { post: Post; featured?: bo
             className="object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-end p-5">
+          <PatternPanel index={post.title.length} className="flex h-full items-end p-5">
             <span className="font-display text-xl text-white/90">{post.category}</span>
-          </div>
+          </PatternPanel>
         )}
       </div>
       <div className="flex flex-1 flex-col">

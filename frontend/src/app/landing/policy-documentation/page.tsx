@@ -127,7 +127,7 @@ export default function PolicyDocumentationPage() {
             <p className="eyebrow">Policy & Documentation</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Build The Governance Foundation{" "}
-              <span className="italic text-accent-700">Behind Compliance.</span>
+              <span className="text-accent-700">Behind Compliance.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               Technology alone does not create compliance. Redcloud Systems helps organizations

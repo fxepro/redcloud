@@ -125,7 +125,7 @@ export default function SecurityAssessmentsPage() {
             <p className="eyebrow">Security Assessments</p>
             <h1 className="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
               Identify Risks{" "}
-              <span className="italic text-accent-700">Before They Become Incidents.</span>
+              <span className="text-accent-700">Before They Become Incidents.</span>
             </h1>
             <p className="mt-6 text-xl leading-relaxed text-ink-600">
               You can&apos;t protect what you can&apos;t see. Redcloud Systems helps organizations
