@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { ArrowUp, Bot, CalendarDays, MessageCircle, X } from "lucide-react";
+import { ArrowUp, Bot, CalendarDays, Loader2, MessageCircle, UserRound, X } from "lucide-react";
+import { submitLead } from "@/lib/api";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -79,17 +80,80 @@ function MessageBody({ text }: { text: string }) {
   return <div className="space-y-2">{blocks}</div>;
 }
 
+type Lead = { name: string; email: string; phone: string };
+
+/** Inline card that collects the visitor's contact details inside the chat. */
+function ContactCard({
+  initial,
+  onSubmit,
+  onDismiss,
+}: {
+  initial: Partial<Lead>;
+  onSubmit: (lead: Lead) => Promise<string | null>;
+  onDismiss: () => void;
+}) {
+  const [lead, setLead] = useState<Lead>({ name: "", email: "", phone: "", ...initial });
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (initial.email) setLead((l) => (l.email ? l : { ...l, email: initial.email! }));
+  }, [initial.email]);
+
+  async function submit(e: FormEvent) {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+    const err = await onSubmit(lead);
+    if (err) setError(err);
+    setSending(false);
+  }
+
+  const input =
+    "w-full rounded-lg border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900 outline-none placeholder:text-ink-400 focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20";
+
+  return (
+    <form onSubmit={submit} className="mr-6 rounded-2xl rounded-bl-md bg-white p-4 shadow-soft ring-1 ring-brand-200">
+      <p className="flex items-center gap-2 font-semibold text-ink-900">
+        <UserRound className="h-4 w-4 text-brand-600" /> How can our team reach you?
+      </p>
+      <p className="mt-1 text-xs text-ink-500">We&apos;ll follow up personally — usually within one business day.</p>
+      <div className="mt-3 space-y-2">
+        <input className={input} required placeholder="Your name *" autoComplete="name" value={lead.name}
+          onChange={(e) => setLead({ ...lead, name: e.target.value })} />
+        <input className={input} required type="email" placeholder="Email *" autoComplete="email" value={lead.email}
+          onChange={(e) => setLead({ ...lead, email: e.target.value })} />
+        <input className={input} type="tel" placeholder="Phone (optional)" autoComplete="tel" value={lead.phone}
+          onChange={(e) => setLead({ ...lead, phone: e.target.value })} />
+      </div>
+      {error && <p className="mt-2 text-xs text-brand-700">{error}</p>}
+      <div className="mt-3 flex items-center gap-3">
+        <button type="submit" disabled={sending}
+          className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60">
+          {sending && <Loader2 className="h-3.5 w-3.5 animate-spin" />} Send my details
+        </button>
+        <button type="button" onClick={onDismiss} className="text-xs font-medium text-ink-500 hover:text-ink-700">
+          Not now
+        </button>
+      </div>
+    </form>
+  );
+}
+
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([GREETING]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  // Contact capture: "idle" until the first answer, then the card shows until sent or dismissed.
+  const [leadState, setLeadState] = useState<"idle" | "asking" | "dismissed" | "sent">("idle");
+  const [typedEmail, setTypedEmail] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [messages, open]);
+  }, [messages, open, leadState, busy]);
 
   useEffect(() => {
     if (open) inputRef.current?.focus();
@@ -98,6 +162,11 @@ export function ChatWidget() {
   async function send(text: string) {
     const content = text.trim();
     if (!content || busy) return;
+    const emailInText = content.match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
+    if (emailInText) {
+      setTypedEmail(emailInText[0].replace(/[.,;:!?)]+$/, ""));
+      setLeadState((st) => (st === "sent" ? st : "asking"));
+    }
     const history: Msg[] = [...messages, { role: "user", content }];
     setMessages([...history, { role: "assistant", content: "" }]);
     setInput("");
@@ -128,11 +197,35 @@ export function ChatWidget() {
         update(reply);
       }
       if (!reply.trim()) update("Sorry — I didn't catch that. Could you rephrase?");
+      else setLeadState((st) => (st === "idle" ? "asking" : st));
     } catch {
       update("Sorry — I couldn't connect. Please check your connection and try again.");
     } finally {
       setBusy(false);
     }
+  }
+
+  async function sendLead(lead: Lead): Promise<string | null> {
+    const transcript = messages
+      .filter((m) => m !== GREETING && m.content)
+      .map((m) => `${m.role === "user" ? "Visitor" : "Assistant"}: ${m.content}`)
+      .join("\n\n");
+    const res = await submitLead("chat-lead", {
+      name: lead.name.trim(),
+      email: lead.email.trim(),
+      phone: lead.phone.trim(),
+      message: transcript || "(Visitor left details before asking a question.)",
+    });
+    if (!res.ok) return res.message;
+    setLeadState("sent");
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        content: `Thanks, ${lead.name.trim().split(" ")[0]}! I've passed your details and this conversation to the team — they'll be in touch at **${lead.email.trim()}**. Feel free to keep asking questions here.`,
+      },
+    ]);
+    return null;
   }
 
   function onSubmit(e: FormEvent) {
@@ -196,6 +289,13 @@ export function ChatWidget() {
                 </div>
               ),
             )}
+            {leadState === "asking" && !busy && (
+              <ContactCard
+                initial={{ email: typedEmail }}
+                onSubmit={sendLead}
+                onDismiss={() => setLeadState("dismissed")}
+              />
+            )}
             {showSuggestions && (
               <div className="flex flex-wrap gap-2 pt-1">
                 {SUGGESTIONS.map((s) => (
@@ -242,9 +342,19 @@ export function ChatWidget() {
             </div>
             <div className="mt-2 flex items-center justify-between px-1 text-[11px] text-ink-400">
               <span>AI can make mistakes — confirm details with our team.</span>
-              <Link href="/appointment" className="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800">
-                <CalendarDays className="h-3 w-3" /> Talk to a human
-              </Link>
+              {leadState === "sent" ? (
+                <Link href="/appointment" className="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800">
+                  <CalendarDays className="h-3 w-3" /> Book a call
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setLeadState("asking")}
+                  className="inline-flex items-center gap-1 font-semibold text-brand-700 hover:text-brand-800"
+                >
+                  <UserRound className="h-3 w-3" /> Leave contact info
+                </button>
+              )}
             </div>
           </form>
         </div>
